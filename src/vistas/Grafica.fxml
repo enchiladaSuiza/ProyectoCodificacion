@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.ScrollPane?>
 
 <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.GraficaControlador">
-  <LineChart fx:id="grafica" alternativeColumnFillVisible="true" animated="false" createSymbols="false" legendVisible="false">
+  <LineChart fx:id="grafica" alternativeRowFillVisible="false" animated="false" createSymbols="false" horizontalGridLinesVisible="false" legendVisible="false" verticalZeroLineVisible="false">
     <xAxis>
-      <NumberAxis fx:id="ejeX" animated="false" side="BOTTOM" />
+      <NumberAxis fx:id="ejeX" animated="false" minorTickCount="2" minorTickLength="2.0" side="BOTTOM" tickUnit="1.0" />
     </xAxis>
     <yAxis>
-      <NumberAxis fx:id="ejeY" animated="false" side="LEFT" />
+      <NumberAxis fx:id="ejeY" animated="false" autoRanging="false" lowerBound="-1.25" minorTickCount="0" minorTickLength="0.0" minorTickVisible="false" side="LEFT" tickLength="5.0" tickUnit="1.0" upperBound="1.25">
+            <padding>
+               <Insets bottom="10.0" />
+            </padding></NumberAxis>
     </yAxis>
   </LineChart>
 </ScrollPane>

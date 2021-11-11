@@ -56,7 +56,7 @@ public class GraficadorGestorModelo implements GraficadorModelo {
 
     private void actualizarDatos(String bits, String tipoCodificacion) {
         puntosGrafica.clear();
-        if (tipoCodificacion != null) {
+        if (tipoCodificacion != null && bits != null) {
             if (tipoCodificacion.equals(codificaciones[0])) {
                 codificacionUnipolar(bits);
             }

@@ -5,12 +5,14 @@ import javafx.stage.Stage;
 import vistas.PrincipalControlador;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class EncargadoVistas {
     private final Stage escenario;
     private final FabricaModelosVista fabricaModelosVista;
     private final String archivoPantallaPrincipal = "vistas/Principal.fxml";
     private final String titulo = "Codificación Digital - Comunicaciones en Redes";
+    private final String archivoEstilos = "vistas/css/estilos.css";
 
     public EncargadoVistas(Stage escenario, FabricaModelosVista fabricaModelosVista) {
         this.escenario = escenario;
@@ -29,8 +31,11 @@ public class EncargadoVistas {
 
         escena = new Scene(raiz, 600, 400);
 
+        String css = Objects.requireNonNull(getClass().getResource(archivoEstilos)).toExternalForm();
+        escena.getStylesheets().add(css);
+
         escenario.setMinWidth(400);
-        escenario.setMinHeight(200);
+        escenario.setMinHeight(300);
         escenario.setScene(escena);
         escenario.show();
 
