@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ScrollPane?>
+
+<ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.GraficaControlador">
+  <LineChart fx:id="grafica" alternativeColumnFillVisible="true" animated="false" createSymbols="false" legendVisible="false">
+    <xAxis>
+      <NumberAxis fx:id="ejeX" animated="false" side="BOTTOM" />
+    </xAxis>
+    <yAxis>
+      <NumberAxis fx:id="ejeY" animated="false" side="LEFT" />
+    </yAxis>
+  </LineChart>
+</ScrollPane>

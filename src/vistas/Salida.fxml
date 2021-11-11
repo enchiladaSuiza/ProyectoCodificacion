@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.SalidaControlador">
+   <children>
+      <FlowPane alignment="TOP_CENTER" columnHalignment="CENTER" hgap="20.0" minWidth="230.0">
+         <children>
+            <Label text="Salida" />
+            <ComboBox fx:id="tipoCodificacionComboBox" promptText="Codificación" />
+         </children>
+      </FlowPane>
+      <TextArea fx:id="salidaBinarioTextArea" editable="false" wrapText="true" VBox.vgrow="ALWAYS" />
+   </children>
+</VBox>

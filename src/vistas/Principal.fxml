@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.SplitPane?>
+
+<SplitPane dividerPositions="0.4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.PrincipalControlador">
+  <items>
+      <SplitPane cacheShape="false" dividerPositions="0.5" nodeOrientation="LEFT_TO_RIGHT">
+        <items>
+            <fx:include fx:id="entrada" source="Entrada.fxml" />
+            <fx:include fx:id="salida" source="Salida.fxml" />
+        </items>
+      </SplitPane>
+      <fx:include fx:id="grafica" source="Grafica.fxml" />
+  </items>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</SplitPane>
