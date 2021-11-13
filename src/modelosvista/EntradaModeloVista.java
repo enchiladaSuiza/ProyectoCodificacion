@@ -24,11 +24,7 @@ public class EntradaModeloVista {
         entradaNumero.bindBidirectional(modelo.getEntradaNumero(), new StringConverter<>() {
             @Override
             public String toString(Number number) {
-                if ((long)number == 0) {
-                    return "";
-                } else {
-                    return number.toString();
-                }
+                return number.toString();
             }
 
             @Override
@@ -36,7 +32,7 @@ public class EntradaModeloVista {
                 try {
                     return Long.parseLong(s);
                 } catch (Exception e) {
-                    return null;
+                    return 0;
                 }
             }
         });

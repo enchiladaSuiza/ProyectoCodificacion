@@ -19,8 +19,11 @@ import java.util.Arrays;
 public class EntradaControlador {
     private EntradaModeloVista modeloVista;
 
-    @FXML private ComboBox<String> tipoEntradaComboBox;
-    @FXML private VBox entradaVBox;
+    @FXML
+    private ComboBox<String> tipoEntradaComboBox;
+
+    @FXML
+    private VBox entradaVBox;
 
     private ObservableList<Node> nodosVBox;
     private TextArea entradaBitsTextArea;

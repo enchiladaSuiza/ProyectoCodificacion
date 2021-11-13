@@ -20,15 +20,28 @@ public class CodificadorGestorModelo implements CodificadorModelo {
         salidaBinario = new SimpleStringProperty();
         entradaBinario.addListener(
                 (observableValue, anterior, nuevo) -> {
+                    if (nuevo == null || nuevo.isEmpty()) {
+                        salidaBinario.set("0");
+                    }
+                    else {
                         salidaBinario.set(nuevo);
+                    }
                 });
         entradaNumero.addListener(
                 (observableValue, anterior, nuevo) -> salidaBinario.set(convertirNumero(nuevo.longValue())));
         entradaTexto.addListener(
-                (observableValue, anterior, nuevo) -> salidaBinario.set(convertirTexto(nuevo)));
+                (observableValue, anterior, nuevo) -> {
+                    if (nuevo == null || nuevo.isEmpty())
+                    {
+                        salidaBinario.set("0");
+                    }
+                    else {
+                        salidaBinario.set(convertirTexto(nuevo));
+                    }
+                });
         tipoEntrada.addListener((observableValue, anterior, nuevo) -> {
             if (nuevo.equals(tiposEntradas[0])) {
-                // salidaBinario.setValue(entradaBinario.get());
+                salidaBinario.setValue(entradaBinario.get());
             }
             else if (nuevo.equals(tiposEntradas[1])) {
                 salidaBinario.setValue(convertirNumero(entradaNumero.get()));
@@ -49,14 +62,6 @@ public class CodificadorGestorModelo implements CodificadorModelo {
             binarioCompleto.append(binario);
         }
         return binarioCompleto.toString();
-    }
-
-    public String[] convertirTextoArreglo(String texto) {
-        String[] binarios = new String[texto.length()];
-        for (int i = 0; i < texto.length(); i++) {
-            binarios[i] = Integer.toBinaryString(texto.charAt(i));
-        }
-        return binarios;
     }
 
     public String convertirNumero(Long numero) {

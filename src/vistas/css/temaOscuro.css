@@ -1,0 +1,64 @@
+.root {
+    -fx-background: #272822;
+    -fx-border-color: #272822;
+}
+
+.combo-box-base {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, #272822;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 7px 7px 7px 7px;
+}
+
+.combo-box .cell {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+}
+
+.combo-box .list-view {
+    -fx-background-color: #272822;
+}
+
+.text-field {
+    -fx-background-color: #272822;
+    -fx-border-color: white;
+    -fx-text-fill: white;
+}
+
+.text-area {
+    -fx-text-fill: white;
+}
+
+.text-area .content {
+    -fx-background-color: #272822;
+    -fx-border-color: white;
+}
+
+.split-pane-divider {
+    -fx-background-color: white;
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: white;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: #272822;
+    -fx-border-color: #272822;
+    -fx-background-radius: 0.0em;
+    -fx-border-radius: 2.0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: white;
+    -fx-background-insets: 2.0, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: white;
+    -fx-background-insets: 2.0, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+}
