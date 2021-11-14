@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="entradaVBox" alignment="CENTER" minHeight="100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.EntradaControlador">
+<VBox fx:id="entradaVBox" alignment="CENTER" minHeight="85.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.EntradaControlador">
    <children>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="20.0" minWidth="150.0" prefWrapLength="0.0">
          <children>

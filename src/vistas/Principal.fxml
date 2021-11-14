@@ -1,19 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.VBox?>
 
-<SplitPane dividerPositions="0.4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.PrincipalControlador">
-  <items>
-      <SplitPane cacheShape="false" dividerPositions="0.5" nodeOrientation="LEFT_TO_RIGHT">
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.PrincipalControlador">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu text="Vista">
+            <items>
+                <MenuItem mnemonicParsing="false" text="Portada" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <RadioMenuItem mnemonicParsing="false" onAction="#quitarTemas" selected="true" text="Tema claro">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="tema" />
+                     </toggleGroup>
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="C" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </RadioMenuItem>
+                  <RadioMenuItem mnemonicParsing="false" onAction="#aplicarTemaOscuro" text="Tema oscuro" toggleGroup="$tema">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="O" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </RadioMenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <CheckMenuItem mnemonicParsing="false" text="Mostrar símbolos" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Ayuda">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Cómo usar" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL">
         <items>
-            <fx:include fx:id="entrada" source="Entrada.fxml" />
-            <fx:include fx:id="salida" source="Salida.fxml" />
+            <SplitPane cacheShape="false" dividerPositions="0.5" nodeOrientation="LEFT_TO_RIGHT">
+              <items>
+                  <fx:include fx:id="entrada" source="Entrada.fxml" />
+                  <fx:include fx:id="salida" source="Salida.fxml" />
+              </items>
+            </SplitPane>
+            <fx:include fx:id="grafica" source="Grafica.fxml" />
         </items>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </SplitPane>
-      <fx:include fx:id="grafica" source="Grafica.fxml" />
-  </items>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
-</SplitPane>
+   </children>
+</VBox>
