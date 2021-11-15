@@ -24,5 +24,6 @@ public class SalidaControlador {
         tipoCodificacionComboBox.valueProperty().bindBidirectional(modeloVista.getTipoCodificacion());
         tipoCodificacionComboBox
                 .setItems(FXCollections.observableList(Arrays.asList(GraficadorModelo.codificaciones)));
+        tipoCodificacionComboBox.getSelectionModel().selectFirst();
     }
 }

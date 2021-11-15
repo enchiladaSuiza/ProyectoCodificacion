@@ -16,7 +16,7 @@ public class GraficaControlador {
     private ScrollPane scrollPane;
 
     @FXML
-    private LineChart<Number, Number> grafica;
+    private LineChart<Double, Double> grafica;
 
     @FXML
     private NumberAxis ejeX;
@@ -24,8 +24,8 @@ public class GraficaControlador {
     @FXML
     private NumberAxis ejeY;
 
-    private XYChart.Series<Number, Number> serie;
-    private final int relacionAnchoValoresMinimo = 5;
+    private XYChart.Series<Double, Double> serie;
+    private final int anchoMinVoltaje = 10;
     private boolean breakpointAncho = false;
 
     public void init(GraficaModeloVista modeloVista) {
@@ -35,7 +35,7 @@ public class GraficaControlador {
         serie.dataProperty().bindBidirectional(modeloVista.getPuntosGrafica());
 
         grafica.getData().add(serie);
-        serie.getData().addListener((ListChangeListener<XYChart.Data<Number, Number>>) change ->
+        serie.getData().addListener((ListChangeListener<XYChart.Data<Double, Double>>) change ->
                 ajustarAnchoGrafica());
         grafica.getScene().widthProperty().addListener((observableValue, number, t1) ->
                 ajustarAnchoGrafica());
@@ -43,13 +43,18 @@ public class GraficaControlador {
 
     private void ajustarAnchoGrafica() {
         int numeroValores = serie.getData().size();
-        int relacionAnchoValores = (int) (grafica.getScene().getWidth() / numeroValores);
-        if (relacionAnchoValores < relacionAnchoValoresMinimo) {
+        double limiteSuperior = 0;
+        if (numeroValores > 0) {
+            limiteSuperior = serie.getData().get(numeroValores - 1).getXValue();
+            ejeX.setUpperBound(limiteSuperior);
+        }
+        double relacionAnchoValores = (grafica.getScene().getWidth() / limiteSuperior);
+        if (relacionAnchoValores < anchoMinVoltaje) {
             if (breakpointAncho) {
-                grafica.setPrefWidth(relacionAnchoValoresMinimo * numeroValores);
+                grafica.setPrefWidth(anchoMinVoltaje * limiteSuperior);
             }
             else {
-                grafica.setPrefWidth(relacionAnchoValoresMinimo * numeroValores);
+                grafica.setPrefWidth(anchoMinVoltaje * limiteSuperior);
                 scrollPane.setFitToWidth(false);
                 breakpointAncho = true;
             }

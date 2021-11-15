@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GraficadorGestorModelo implements GraficadorModelo {
-    private int ALTO = 1;
-    private int NULO = 0;
-    private int BAJO = -1;
+    private float ALTO = 0.9f;
+    private float NULO = 0;
+    private float BAJO = -0.9f;
 
     private StringProperty entradaBits;
     private StringProperty tipoCodificacion;
-    private ListProperty<XYChart.Data<Number, Number>> puntosGrafica;
+    private ListProperty<XYChart.Data<Double, Double>> puntosGrafica;
 
     public GraficadorGestorModelo() {
         entradaBits = new SimpleStringProperty();
@@ -29,27 +29,27 @@ public class GraficadorGestorModelo implements GraficadorModelo {
                 (observableValue, anterior, nuevo)-> actualizarDatos(entradaBits.get(), nuevo));
     }
 
-    private void agregarUnidadVoltaje(int posicionX, int voltaje) {
+    private void agregarUnidadVoltaje(double posicionX, double voltaje) {
         puntosGrafica.add(new XYChart.Data<>(posicionX, voltaje));
         puntosGrafica.add(new XYChart.Data<>(posicionX + 1, voltaje));
     }
 
-    private void agregarMitadVoltaje(float posicionX, int voltaje) {
+    private void agregarMitadVoltaje(double posicionX, double voltaje) {
         puntosGrafica.add(new XYChart.Data<>(posicionX, voltaje));
         puntosGrafica.add(new XYChart.Data<>(posicionX + 0.5, voltaje));
     }
 
     // función fea :(
-    private void modificarUnidadVoltaje(int posicionX, int voltajeNuevo) {
+    private void modificarUnidadVoltaje(double posicionX, double voltajeNuevo) {
         // lista de los datos que están en la misma posiciónX
-        List<XYChart.Data<Number, Number>> lista = puntosGrafica.stream()
-                .filter(i -> (int)i.getXValue() == posicionX).toList();
+        List<XYChart.Data<Double, Double>> lista = puntosGrafica.stream()
+                .filter(i -> i.getXValue() == posicionX).toList();
         // normalmente queremos el que se agregó al último
-        XYChart.Data<Number, Number> dato1 = lista.get(lista.size() - 1);
+        XYChart.Data<Double, Double> dato1 = lista.get(lista.size() - 1);
         // después, como queremos cambiar la unidad entera, necesitamos el siguiente punto
         // este es el primero que agregamos
-        XYChart.Data<Number, Number> dato2 =
-                puntosGrafica.stream().filter(i -> (int)i.getXValue() == posicionX + 1).toList().get(0);
+        XYChart.Data<Double, Double> dato2 =
+                puntosGrafica.stream().filter(i -> i.getXValue() == posicionX + 1).toList().get(0);
         dato1.setYValue(voltajeNuevo);
         dato2.setYValue(voltajeNuevo);
     }
@@ -247,5 +247,5 @@ public class GraficadorGestorModelo implements GraficadorModelo {
 
     public StringProperty getEntradaBits() { return entradaBits; }
     public StringProperty getTipoCodificacion() { return tipoCodificacion; }
-    public ListProperty<XYChart.Data<Number, Number>> getPuntosGrafica() { return puntosGrafica; }
+    public ListProperty<XYChart.Data<Double, Double>> getPuntosGrafica() { return puntosGrafica; }
 }

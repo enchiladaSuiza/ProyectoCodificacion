@@ -17,7 +17,7 @@ public class GraficaModeloVista {
 
     private StringProperty entradaBits;
     private StringProperty tipoCodificacion;
-    private ListProperty<XYChart.Data<Number, Number>> puntosGrafica;
+    private ListProperty<XYChart.Data<Double, Double>> puntosGrafica;
 
     public GraficaModeloVista(CodificadorModelo codificadorModelo, GraficadorModelo graficadorModelo) {
         this.codificadorModelo = codificadorModelo;
@@ -33,5 +33,5 @@ public class GraficaModeloVista {
 
     public StringProperty getEntradaBits() { return entradaBits; }
     public StringProperty getTipoCodificacion() { return tipoCodificacion; }
-    public ListProperty<XYChart.Data<Number, Number>> getPuntosGrafica() { return puntosGrafica; }
+    public ListProperty<XYChart.Data<Double, Double>> getPuntosGrafica() { return puntosGrafica; }
 }

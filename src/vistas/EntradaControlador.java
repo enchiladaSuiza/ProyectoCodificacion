@@ -55,10 +55,10 @@ public class EntradaControlador {
 
         tipoEntradaComboBox
                 .setItems(FXCollections.observableList(Arrays.asList(CodificadorModelo.tiposEntradas)));
-
         tipoEntradaComboBox.valueProperty().addListener(
                 (observableValue, anterior, nuevo) -> cambioTipoDeEntrada(nuevo));
         tipoEntradaComboBox.valueProperty().bindBidirectional(modeloVista.getTipoEntrada());
+        tipoEntradaComboBox.getSelectionModel().selectFirst();
     }
 
     private void cambioTipoDeEntrada(String nuevoValor) {

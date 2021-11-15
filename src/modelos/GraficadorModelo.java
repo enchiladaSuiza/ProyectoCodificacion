@@ -10,5 +10,5 @@ public interface GraficadorModelo {
 
     StringProperty getEntradaBits();
     StringProperty getTipoCodificacion();
-    ListProperty<XYChart.Data<Number, Number>> getPuntosGrafica();
+    ListProperty<XYChart.Data<Double, Double>> getPuntosGrafica();
 }
