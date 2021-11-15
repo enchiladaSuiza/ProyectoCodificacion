@@ -1,5 +1,6 @@
 package vistas;
 
+import backbone.EncargadoVistas;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -7,7 +8,6 @@ import javafx.scene.Scene;
 import modelosvista.PrincipalModeloVista;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class PrincipalControlador {
     private PrincipalModeloVista modeloVista;
@@ -25,32 +25,23 @@ public class PrincipalControlador {
     @FXML
     private GraficaControlador graficaController;
 
-    private Scene escena;
-    private final String archivoTemaOscuro = "css/temaOscuro.css";
-    private ArrayList<String> temas;
+    private EncargadoVistas encargadoVistas;
 
-    public void init(PrincipalModeloVista modeloVista, Scene escena) {
+    public void init(PrincipalModeloVista modeloVista, EncargadoVistas encargadoVistas) {
         this.modeloVista = modeloVista;
-        this.escena = escena;
-
-        temas = new ArrayList<>();
-        String temaOscuro = getClass().getResource(archivoTemaOscuro).toExternalForm();
-        temas.add(temaOscuro);
+        this.encargadoVistas = encargadoVistas;
     }
 
     public void aplicarTemaOscuro() {
-        quitarTemas();
-        escena.getStylesheets().add(temas.get(0));
+        encargadoVistas.aplicarTemaOscuro();
     }
 
     public void quitarTemas() {
-        ObservableList<String> stylesheets = escena.getStylesheets();
-        for (int i = 0; i < stylesheets.size(); i++) {
-            if (temas.contains(stylesheets.get(i))) {
-                stylesheets.remove(stylesheets.get(i));
-                break;
-            }
-        }
+        encargadoVistas.quitarTemas();
+    }
+
+    public void mostrarPortada() throws Exception {
+        encargadoVistas.abrirPortada();
     }
 
     public EntradaControlador getEntradaController() {

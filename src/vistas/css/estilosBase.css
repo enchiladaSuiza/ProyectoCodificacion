@@ -17,6 +17,12 @@
     -fx-background-radius: 7px 7px 7px 7px;
 }
 
+.button {
+    -fx-background-color: white;
+    -fx-background-radius: 7px;
+    -fx-border-color: #cccccc;
+}
+
 .default-color0.chart-series-line { 
     -fx-stroke: #e60004;
 }
