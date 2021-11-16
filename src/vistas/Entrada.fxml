@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.FlowPane?>
@@ -12,6 +13,9 @@
             <Label text="Entrada" />
             <ComboBox fx:id="tipoEntradaComboBox" promptText="Tipo de entrada" />
          </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
       </FlowPane>
    </children>
 </VBox>

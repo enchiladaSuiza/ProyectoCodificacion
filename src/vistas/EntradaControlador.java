@@ -3,6 +3,7 @@ package vistas;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
@@ -44,6 +45,7 @@ public class EntradaControlador {
         entradaNumeroTextField = new TextField();
         entradaNumeroTextField.setPrefWidth(200);
         entradaNumeroTextField.setMaxWidth(Region.USE_PREF_SIZE);
+        VBox.setMargin(entradaNumeroTextField, new Insets(10));
         entradaNumeroTextField.textProperty().addListener(
                 (observableValue, anterior, nuevo) -> validarNumero(nuevo, entradaNumeroTextField));
         entradaNumeroTextField.textProperty().bindBidirectional(modeloVista.getEntradaNumero());
@@ -66,15 +68,12 @@ public class EntradaControlador {
             nodosVBox.remove(nodosVBox.size() - 1);
         }
         if (nuevoValor.equals(CodificadorModelo.tiposEntradas[0])) {
-            entradaVBox.setSpacing(0);
             nodosVBox.add(entradaBitsTextArea);
         }
         else if (nuevoValor.equals(CodificadorModelo.tiposEntradas[1])) {
-            entradaVBox.setSpacing(20);
             nodosVBox.add(entradaNumeroTextField);
         }
         else if (nuevoValor.equals(CodificadorModelo.tiposEntradas[2])) {
-            entradaVBox.setSpacing(0);
             nodosVBox.add(entradaTextoTextArea);
         }
     }

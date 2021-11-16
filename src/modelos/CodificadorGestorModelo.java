@@ -39,6 +39,7 @@ public class CodificadorGestorModelo implements CodificadorModelo {
                         salidaBinario.set(convertirTexto(nuevo));
                     }
                 });
+
         tipoEntrada.addListener((observableValue, anterior, nuevo) -> {
             if (nuevo.equals(tiposEntradas[0])) {
                 salidaBinario.setValue(entradaBinario.get());

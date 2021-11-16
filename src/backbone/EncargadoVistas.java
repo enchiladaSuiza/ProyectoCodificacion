@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import vistas.PortadaControlador;
 import vistas.PrincipalControlador;
@@ -15,11 +16,13 @@ import java.util.ArrayList;
 
 public class EncargadoVistas {
     private final FabricaModelosVista fabricaModelosVista;
-    private final String titulo = "Codificación Digital - Comunicaciones en Redes";
+    private final String titulo = "Codificación Digital";
     private final String archivoPantallaPrincipal = "../vistas/Principal.fxml";
     private final String archivoPortada = "../vistas/Portada.fxml";
     private final String archivoEstilosBase = "../vistas/css/estilosBase.css";
     private final String archivoTemaOscuro = "../vistas/css/temaOscuro.css";
+    private final String archivoIcono = "../vistas/imagenes/icono.png";
+    private Image icono;
     private Scene escena;
     private String estilosBase;
     private ArrayList<String> temas;
@@ -41,6 +44,8 @@ public class EncargadoVistas {
                 escena.getStylesheets().addAll(change.getList());
             }
         });
+
+        icono = new Image(getClass().getResourceAsStream(archivoIcono));
     }
 
     public void abrirProgramaPrincipal() throws Exception {
@@ -55,8 +60,9 @@ public class EncargadoVistas {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(vista));
         Parent raiz = loader.load();
         Stage escenario = new Stage();
+        Scene escena;
         if (vista.equals(archivoPantallaPrincipal)) {
-            Scene escena = new Scene(raiz, 600, 400);
+            escena = new Scene(raiz, 600, 400);
             this.escena = escena;
             escena.getStylesheets().addAll(stylesheets);
 
@@ -64,6 +70,7 @@ public class EncargadoVistas {
             escenario.setMinHeight(300);
             escenario.setScene(escena);
             escenario.setTitle(titulo);
+            escenario.getIcons().add(icono);
             escenario.show();
 
             PrincipalControlador controlador = loader.getController();
@@ -74,12 +81,14 @@ public class EncargadoVistas {
         }
 
         else if (vista.equals(archivoPortada)) {
-            Scene escena = new Scene(raiz);
+            escena = new Scene(raiz);
             escena.getStylesheets().addAll(stylesheets);
 
             escenario.setMinWidth(750);
             escenario.setMinHeight(445);
             escenario.setScene(escena);
+            escenario.setTitle(titulo);
+            escenario.getIcons().add(icono);
             escenario.show();
 
             PortadaControlador controlador = loader.getController();

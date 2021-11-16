@@ -65,4 +65,8 @@ public class GraficaControlador {
             breakpointAncho = false;
         }
     }
+
+    public void alternarSimbolos() {
+        grafica.setCreateSymbols(!grafica.getCreateSymbols());
+    }
 }

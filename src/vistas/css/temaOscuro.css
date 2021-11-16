@@ -2,8 +2,27 @@
     -fx-background: #272822;
 }
 
+.text-area {
+    -fx-text-fill: white;
+    -fx-background-color: #272822, #272822;
+    -fx-border-color: #899995 transparent transparent transparent;
+    -fx-border-radius: 7px 7px 0 0;
+    -fx-background-radius: 7px
+}
+
+.text-area .content {
+    -fx-background-color: #272822;
+    -fx-border-color: #899995;
+}
+
+.text-field {
+    -fx-background-color: #272822;
+    -fx-border-color: #899995;
+    -fx-text-fill: white;
+}
+
 .combo-box-base {
-    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, #272822;
+    -fx-background-color: -fx-shadow-highlight-color, #899995, #899995, #272822;
     -fx-background-insets: 0 0 -1 0, 0, 1, 2;
     -fx-background-radius: 7px 7px 7px 7px;
 }
@@ -17,53 +36,53 @@
     -fx-background-color: #272822;
 }
 
-.text-field {
-    -fx-background-color: #272822;
-    -fx-border-color: white;
-    -fx-text-fill: white;
-}
-
-.text-area {
-    -fx-text-fill: white;
-}
-
-.text-area .content {
-    -fx-background-color: #272822;
-    -fx-border-color: white;
+.combo-box .list-view .list-cell:hover, .combo-box .list-view .list-cell:selected {
+    -fx-background-color: #0096c9;
 }
 
 .split-pane-divider {
-    -fx-background-color: white;
+    -fx-background-color: #899995;
 }
 
 .chart-vertical-grid-lines {
-    -fx-stroke: white;
+    -fx-stroke: #899995;
+}
+
+.axis:left {
+    -fx-border-color: transparent #899995 transparent transparent;
+}
+
+.axis:bottom {
+    -fx-border-color: #899995 transparent transparent transparent;
+}
+
+.axis-tick-mark, .axis-minor-tick-mark {
+    -fx-stroke: #899995;
 }
 
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
     -fx-background-color: #272822;
     -fx-border-color: #272822;
-    -fx-background-radius: 0;
-    -fx-border-radius: 7px;
 }
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color: white;
-    -fx-background-insets: 2.0, 0.0, 0.0;
-    -fx-background-radius: 7px;
+    -fx-background-color: #899995;
 }
 
 .scroll-bar:horizontal .thumb:hover,
 .scroll-bar:vertical .thumb:hover {
-    -fx-background-color: white;
-    -fx-background-insets: 2.0, 0.0, 0.0;
-    -fx-background-radius: 7px;
+    -fx-background-color: #cccccc;
+}
+
+.scroll-pane .corner {    
+    -fx-background-color: #272727 ;
 }
 
 .menu-bar {
-    -fx-background-color: #272822;
+    /* -fx-background-color: #272822; */
+    -fx-border-color: #899995;
 }
 
 /* .menu {

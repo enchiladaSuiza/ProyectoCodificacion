@@ -34,7 +34,7 @@
                      </accelerator>
                   </RadioMenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <CheckMenuItem mnemonicParsing="false" text="Mostrar símbolos" />
+                  <CheckMenuItem mnemonicParsing="false" onAction="#alternarSimbolos" text="Mostrar símbolos" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Ayuda">
@@ -44,7 +44,7 @@
             </Menu>
         </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL">
+      <SplitPane dividerPositions="0.4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" VBox.vgrow="ALWAYS">
         <items>
             <SplitPane cacheShape="false" dividerPositions="0.5" nodeOrientation="LEFT_TO_RIGHT">
               <items>

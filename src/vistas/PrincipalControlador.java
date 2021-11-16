@@ -1,13 +1,9 @@
 package vistas;
 
 import backbone.EncargadoVistas;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import modelosvista.PrincipalModeloVista;
-
-import java.util.ArrayList;
 
 public class PrincipalControlador {
     private PrincipalModeloVista modeloVista;
@@ -42,6 +38,10 @@ public class PrincipalControlador {
 
     public void mostrarPortada() throws Exception {
         encargadoVistas.abrirPortada();
+    }
+
+    public void alternarSimbolos() {
+        graficaController.alternarSimbolos();
     }
 
     public EntradaControlador getEntradaController() {
