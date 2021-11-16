@@ -36,6 +36,12 @@ public class PrincipalControlador {
         encargadoVistas.quitarTemas();
     }
 
+    public void aplicarAcentoAzul() { encargadoVistas.aplicarAcentoAzul(); }
+
+    public void aplicarAcentoVerde() { encargadoVistas.aplicarAcentoVerde(); }
+
+    public void quitarAcentos() { encargadoVistas.quitarAcentos(); }
+
     public void mostrarPortada() throws Exception {
         encargadoVistas.abrirPortada();
     }

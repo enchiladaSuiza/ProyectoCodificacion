@@ -21,11 +21,13 @@ public class EncargadoVistas {
     private final String archivoPortada = "../vistas/Portada.fxml";
     private final String archivoEstilosBase = "../vistas/css/estilosBase.css";
     private final String archivoTemaOscuro = "../vistas/css/temaOscuro.css";
+    private final String archivoAcentoAzul = "../vistas/css/acentoAzul.css";
+    private final String archivoAcentoVerde = "../vistas/css/acentoVerde.css";
     private final String archivoIcono = "../vistas/imagenes/icono.png";
     private Image icono;
     private Scene escena;
     private String estilosBase;
-    private ArrayList<String> temas;
+    private ArrayList<String> temas, acentos;
     private ObservableList<String> stylesheets;
 
     public EncargadoVistas(FabricaModelosVista fabricaModelosVista) {
@@ -36,6 +38,12 @@ public class EncargadoVistas {
         temas = new ArrayList<>();
         String temaOscuro = getClass().getResource(archivoTemaOscuro).toExternalForm();
         temas.add(temaOscuro);
+
+        acentos = new ArrayList<>();
+        String acentoAzul = getClass().getResource(archivoAcentoAzul).toExternalForm();
+        String acentoVerde = getClass().getResource(archivoAcentoVerde).toExternalForm();
+        acentos.add(acentoAzul);
+        acentos.add(acentoVerde);
 
         stylesheets = FXCollections.observableArrayList(estilosBase);
         stylesheets.addListener((ListChangeListener<String>) change -> {
@@ -104,6 +112,25 @@ public class EncargadoVistas {
     public void quitarTemas() {
         for (int i = 0; i < stylesheets.size(); i++) {
             if (temas.contains(stylesheets.get(i))) {
+                stylesheets.remove(stylesheets.get(i));
+                break;
+            }
+        }
+    }
+
+    public void aplicarAcentoAzul() {
+        quitarAcentos();
+        stylesheets.add(acentos.get(0));
+    }
+
+    public void aplicarAcentoVerde() {
+        quitarAcentos();
+        stylesheets.add(acentos.get(1));
+    }
+
+    public void quitarAcentos() {
+        for (int i = 0; i < stylesheets.size(); i++) {
+            if (acentos.contains(stylesheets.get(i))) {
                 stylesheets.remove(stylesheets.get(i));
                 break;
             }

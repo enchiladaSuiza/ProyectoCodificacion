@@ -5,14 +5,27 @@
 }
 
 .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: #cccccc;
     -fx-border-radius: 7px;
+    -fx-accent: #e62b37;
+}
+
+.text-field:focused {
+    -fx-background-color: transparent;
+    -fx-border-color: #e62b37;
 }
 
 .text-area {
     -fx-background-color: white, white;
     -fx-border-color: #cccccc transparent transparent transparent;
     -fx-border-radius: 7px 7px 0 0;
-    -fx-background-radius: 7px
+    -fx-background-radius: 7px;
+    -fx-accent: #e62b37;
+}
+
+.text-area:focused {
+    -fx-border-color: #e62b37 #e62b37 transparent #e62b37;
 }
 
 .text-area .scroll-pane {
@@ -34,6 +47,10 @@
     -fx-background-radius: 7px 7px 7px 7px;
 }
 
+.combo-box .list-view .list-cell:hover, .combo-box .list-view .list-cell:selected {
+    -fx-background-color: #e62b37;
+}
+
 .button {
     -fx-background-color: white;
     -fx-background-radius: 7px;
@@ -42,6 +59,10 @@
 
 .default-color0.chart-series-line { 
     -fx-stroke: #e62b37;
+}
+
+.default-color0.chart-line-symbol {
+    -fx-background-color: #e62b37;
 }
 
 .split-pane-divider {
@@ -106,6 +127,16 @@
 .menu-bar {
     -fx-background-color: transparent;
     -fx-border-color: #cccccc;
+}
+
+.menu:showing, .menu:hover, .menu-item:focused {
+    -fx-background-color: #e62b37;
+}
+
+.separator {
+    -fx-background-color: #cccccc;
+    -fx-border-color: transparent;
+    -fx-pref-height: 2px;
 }
 
 #tituloProyectoLabel {

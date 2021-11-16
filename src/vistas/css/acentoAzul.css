@@ -1,0 +1,31 @@
+.text-field {
+    -fx-accent: #715edd;
+}
+
+.text-field:focused {
+    -fx-border-color: #715edd;
+}
+
+.text-area {
+    -fx-accent: #715edd;
+}
+
+.text-area:focused {
+    -fx-border-color: #715edd #715edd transparent #715edd;
+}
+
+.combo-box .list-view .list-cell:hover, .combo-box .list-view .list-cell:selected {
+    -fx-background-color: #715edd;
+}
+
+.default-color0.chart-series-line { 
+    -fx-stroke: #715edd;
+}
+
+.default-color0.chart-line-symbol {
+    -fx-background-color: #715edd;
+}
+
+.menu:showing, .menu:hover, .menu-item:focused {
+    -fx-background-color: #715edd;
+}

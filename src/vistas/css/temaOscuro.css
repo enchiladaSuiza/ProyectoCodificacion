@@ -16,7 +16,7 @@
 }
 
 .text-field {
-    -fx-background-color: #272822;
+    -fx-background-color: #272822, #272822;
     -fx-border-color: #899995;
     -fx-text-fill: white;
 }
@@ -34,10 +34,6 @@
 
 .combo-box .list-view {
     -fx-background-color: #272822;
-}
-
-.combo-box .list-view .list-cell:hover, .combo-box .list-view .list-cell:selected {
-    -fx-background-color: #0096c9;
 }
 
 .split-pane-divider {
@@ -99,4 +95,10 @@
 
 .context-menu {
     -fx-background-color: #272822;
+}
+
+.separator {
+    -fx-background-color: #899995;
+    -fx-border-color: transparent;
+    -fx-pref-height: 2px;
 }

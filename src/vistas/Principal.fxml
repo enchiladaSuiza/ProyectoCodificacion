@@ -20,7 +20,7 @@
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#mostrarPortada" text="Portada" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <RadioMenuItem mnemonicParsing="false" onAction="#quitarTemas" selected="true" text="Tema claro">
+                  <RadioMenuItem onAction="#quitarTemas" selected="true" text="Tema claro">
                      <toggleGroup>
                         <ToggleGroup fx:id="tema" />
                      </toggleGroup>
@@ -28,13 +28,35 @@
                         <KeyCodeCombination alt="DOWN" code="C" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </RadioMenuItem>
-                  <RadioMenuItem mnemonicParsing="false" onAction="#aplicarTemaOscuro" text="Tema oscuro" toggleGroup="$tema">
+                  <RadioMenuItem onAction="#aplicarTemaOscuro" text="Tema oscuro" toggleGroup="$tema">
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="O" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </RadioMenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <CheckMenuItem mnemonicParsing="false" onAction="#alternarSimbolos" text="Mostrar símbolos" />
+                  <RadioMenuItem onAction="#quitarAcentos" selected="true" text="Acento rojo">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="acento" />
+                     </toggleGroup>
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="R" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </RadioMenuItem>
+                  <RadioMenuItem onAction="#aplicarAcentoAzul" text="Acento azul" toggleGroup="$acento">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="A" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </RadioMenuItem>
+                  <RadioMenuItem mnemonicParsing="false" onAction="#aplicarAcentoVerde" text="Acento verde" toggleGroup="$acento">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="V" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </RadioMenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <CheckMenuItem onAction="#alternarSimbolos" text="Mostrar símbolos">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="S" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></CheckMenuItem>
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Ayuda">
