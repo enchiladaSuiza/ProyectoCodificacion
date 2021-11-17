@@ -26,7 +26,6 @@ public class GraficaControlador {
 
     private XYChart.Series<Double, Double> serie;
     private final int anchoMinVoltaje = 10;
-    private boolean breakpointAncho = false;
 
     public void init(GraficaModeloVista modeloVista) {
         this.modeloVista = modeloVista;
@@ -34,36 +33,15 @@ public class GraficaControlador {
         serie = new XYChart.Series<>();
         serie.dataProperty().bindBidirectional(modeloVista.getPuntosGrafica());
 
-        grafica.getData().add(serie);
-        serie.getData().addListener((ListChangeListener<XYChart.Data<Double, Double>>) change ->
-                ajustarAnchoGrafica());
-        grafica.getScene().widthProperty().addListener((observableValue, number, t1) ->
-                ajustarAnchoGrafica());
-    }
+        grafica.prefWidthProperty().bindBidirectional(modeloVista.getAnchoGrafica());
+        ejeX.upperBoundProperty().bindBidirectional(modeloVista.getLimiteAbscisas());
+        scrollPane.fitToWidthProperty().bindBidirectional(modeloVista.getScrollPaneSeAjusta());
 
-    private void ajustarAnchoGrafica() {
-        int numeroValores = serie.getData().size();
-        double limiteSuperior = 0;
-        if (numeroValores > 0) {
-            limiteSuperior = serie.getData().get(numeroValores - 1).getXValue();
-            ejeX.setUpperBound(limiteSuperior);
-        }
-        double relacionAnchoValores = (grafica.getScene().getWidth() / limiteSuperior);
-        if (relacionAnchoValores < anchoMinVoltaje) {
-            if (breakpointAncho) {
-                grafica.setPrefWidth(anchoMinVoltaje * limiteSuperior);
-            }
-            else {
-                grafica.setPrefWidth(anchoMinVoltaje * limiteSuperior);
-                scrollPane.setFitToWidth(false);
-                breakpointAncho = true;
-            }
-        }
-        else if (breakpointAncho) {
-            grafica.setPrefWidth(Region.USE_COMPUTED_SIZE);
-            scrollPane.setFitToWidth(true);
-            breakpointAncho = false;
-        }
+        grafica.getData().add(serie);
+        serie.getData().addListener((ListChangeListener<XYChart.Data<Double, Double >>) change ->
+                modeloVista.ajustarAnchoGrafica(anchoMinVoltaje, grafica.getScene().getWidth()));
+        grafica.getScene().widthProperty().addListener((observableValue, anterior, nuevo) ->
+                modeloVista.ajustarAnchoGrafica(anchoMinVoltaje, nuevo.doubleValue()));
     }
 
     public void alternarSimbolos() {
