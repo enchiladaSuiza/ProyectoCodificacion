@@ -5,11 +5,16 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Interactúa con los datos de la gráfica. Los modifica en base a la entrada en binario.
+ * Es el que implementa los códigos de línea en sí.
+ */
 public class GraficadorGestorModelo implements GraficadorModelo {
     private float ALTO = 0.9f;
     private float NULO = 0;
@@ -19,6 +24,9 @@ public class GraficadorGestorModelo implements GraficadorModelo {
     private StringProperty tipoCodificacion;
     private ListProperty<XYChart.Data<Double, Double>> puntosGrafica;
 
+    /**
+     * Inicializa las propiedades y adhiere listeners.
+     */
     public GraficadorGestorModelo() {
         entradaBits = new SimpleStringProperty();
         tipoCodificacion = new SimpleStringProperty();
@@ -29,143 +37,188 @@ public class GraficadorGestorModelo implements GraficadorModelo {
                 (observableValue, anterior, nuevo)-> actualizarDatos(entradaBits.get(), nuevo));
     }
 
-    private void agregarUnidadVoltaje(double posicionX, double voltaje) {
-        puntosGrafica.add(new XYChart.Data<>(posicionX, voltaje));
-        puntosGrafica.add(new XYChart.Data<>(posicionX + 1, voltaje));
+    /**
+     * Función de utilidad para agregar dos puntos de en la gráfica en el voltaje especificado.
+     * Uno en la posición X dada, y otro en la posición X + 1.
+     * @param puntos
+     * @param posicionX
+     * @param voltaje
+     */
+    private void agregarUnidadVoltaje(
+            ArrayList<XYChart.Data<Double, Double>> puntos, double posicionX, double voltaje) {
+        puntos.add(new XYChart.Data<>(posicionX, voltaje));
+        puntos.add(new XYChart.Data<>(posicionX + 1, voltaje));
     }
 
-    private void agregarMitadVoltaje(double posicionX, double voltaje) {
-        puntosGrafica.add(new XYChart.Data<>(posicionX, voltaje));
-        puntosGrafica.add(new XYChart.Data<>(posicionX + 0.5, voltaje));
+    /**
+     * Función de utilidad para agregar dos putnos en la gráfica en el voltaje especificado.
+     * Uno en la posición X dada, y otro en la posición X + 0.5.
+     * @param puntos
+     * @param posicionX
+     * @param voltaje
+     */
+    private void agregarMitadVoltaje(
+            ArrayList<XYChart.Data<Double, Double>> puntos, double posicionX, double voltaje) {
+        puntos.add(new XYChart.Data<>(posicionX, voltaje));
+        puntos.add(new XYChart.Data<>(posicionX + 0.5, voltaje));
     }
 
-    // función fea :(
-    private void modificarUnidadVoltaje(double posicionX, double voltajeNuevo) {
-        // lista de los datos que están en la misma posiciónX
-        List<XYChart.Data<Double, Double>> lista = puntosGrafica.stream()
+    /**
+     * Busca la serie de puntos dada para encontrar los dos puntos en X, y les asigna un voltaje nuevo.
+     * @param puntos
+     * @param posicionX
+     * @param voltajeNuevo
+     */
+    private void modificarUnidadVoltaje(
+            ArrayList<XYChart.Data<Double, Double>> puntos, double posicionX, double voltajeNuevo) {
+        // Lista de datos que están en la misma posición x
+        List<XYChart.Data<Double, Double>> lista = puntos.stream()
                 .filter(i -> i.getXValue() == posicionX).toList();
-        // normalmente queremos el que se agregó al último
+        // Obtenemos el último que se agregó, pues el anterior pertenece a otra unidad de voltaje.
         XYChart.Data<Double, Double> dato1 = lista.get(lista.size() - 1);
-        // después, como queremos cambiar la unidad entera, necesitamos el siguiente punto
-        // este es el primero que agregamos
+        // Obtenenmos el primer punto agregado en la posción x + 1, que corresponde a la misma unidad de voltaje.
         XYChart.Data<Double, Double> dato2 =
-                puntosGrafica.stream().filter(i -> i.getXValue() == posicionX + 1).toList().get(0);
+                puntos.stream().filter(i -> i.getXValue() == posicionX + 1).toList().get(0);
         dato1.setYValue(voltajeNuevo);
         dato2.setYValue(voltajeNuevo);
     }
 
     private void actualizarDatos(String bits, String tipoCodificacion) {
-        puntosGrafica.clear();
+        ArrayList<XYChart.Data<Double, Double>> puntos = new ArrayList<>();
         if (tipoCodificacion != null && bits != null) {
             if (tipoCodificacion.equals(codificaciones[0])) {
-                codificacionUnipolar(bits);
+                codificacionUnipolar(puntos, bits);
             }
             else if (tipoCodificacion.equals(codificaciones[1])) {
-                codificacionNRZL(bits);
+                codificacionNRZL(puntos, bits);
             }
             else if (tipoCodificacion.equals(codificaciones[2])) {
-                codificacionNRZI(bits);
+                codificacionNRZI(puntos, bits);
             }
             else if (tipoCodificacion.equals(codificaciones[3])) {
-                codificacionAMI(bits);
+                codificacionAMI(puntos, bits);
             }
             else if (tipoCodificacion.equals(codificaciones[4])) {
-                codificacionPseudoternaria(bits);
+                codificacionPseudoternaria(puntos, bits);
             }
             else if (tipoCodificacion.equals(codificaciones[5])) {
-                codificacionB8ZS(bits);
+                codificacionB8ZS(puntos, bits);
             }
             else if (tipoCodificacion.equals(codificaciones[6])) {
-                codificacionManchester(bits);
+                codificacionManchester(puntos, bits);
             }
             else if (tipoCodificacion.equals(codificaciones[7])) {
-                codificacionManchesterDiferencial(bits);
+                codificacionManchesterDiferencial(puntos, bits);
             }
         }
+        puntosGrafica.set(FXCollections.observableArrayList(puntos));
     }
 
-    // 1 es voltaje alto, 0 es nulo
-    private void codificacionUnipolar(String bits) {
+    /**
+     * 1 es voltaje alto, 0 es nulo.
+     * @param bits
+     */
+    private void codificacionUnipolar(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
         for (int i = 0; i < bits.length(); i++) {
             if (bits.charAt(i) == '1') {
-                agregarUnidadVoltaje(i, ALTO);
+                agregarUnidadVoltaje(puntos, i, ALTO);
             }
             else {
-                agregarUnidadVoltaje(i, NULO);
+                agregarUnidadVoltaje(puntos, i, NULO);
             }
         }
     }
 
-    // 0 es voltaje alto, 1 es voltaje bajo
-    private void codificacionNRZL(String bits) {
+    /**
+     * 0 es voltaje alto, 1 es voltaje bajo
+     * @param puntos
+     * @param bits
+     */
+    private void codificacionNRZL(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
         for (int i = 0; i < bits.length(); i++) {
             if (bits.charAt(i) == '1') {
-                agregarUnidadVoltaje(i, BAJO);
+                agregarUnidadVoltaje(puntos, i, BAJO);
             }
             else {
-                agregarUnidadVoltaje(i, ALTO);
+                agregarUnidadVoltaje(puntos, i, ALTO);
             }
         }
     }
 
-    // 0 es no transición, 1 es transición
-    private void codificacionNRZI(String bits) {
+    /**
+     * 0 es no transición, 1 es transición
+     * @param puntos
+     * @param bits
+     */
+    private void codificacionNRZI(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
         boolean voltajeEsAlto = false;
         for (int i = 0; i < bits.length(); i++) {
-            if (bits.charAt(i) == '1') {
+            if (bits.charAt(i) == '1') { // Cuando me encuentro con unos cambio de voltaje.
                 voltajeEsAlto = !voltajeEsAlto;
             }
             if (voltajeEsAlto) {
-                agregarUnidadVoltaje(i, ALTO);
+                agregarUnidadVoltaje(puntos, i, ALTO);
             }
             else {
-                agregarUnidadVoltaje(i, BAJO);
+                agregarUnidadVoltaje(puntos, i, BAJO);
             }
         }
     }
 
-    // 0 es nulo, 1 va alternando entre alto y bajo
-    private void codificacionAMI(String bits) {
+    /**
+     * 0 es nulo, 1 va alternando entre alto y bajo.
+     * @param puntos
+     * @param bits
+     */
+    private void codificacionAMI(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
         boolean voltajeEsAlto = false;
         for (int i = 0; i < bits.length(); i++) {
             if (bits.charAt(i) == '1') {
-                voltajeEsAlto = !voltajeEsAlto;
+                voltajeEsAlto = !voltajeEsAlto; // Cambio de voltaje
                 if (voltajeEsAlto) {
-                    agregarUnidadVoltaje(i, ALTO);
+                    agregarUnidadVoltaje(puntos, i, ALTO);
                 }
                 else {
-                    agregarUnidadVoltaje(i, BAJO);
+                    agregarUnidadVoltaje(puntos, i, BAJO);
                 }
             }
             else {
-                agregarUnidadVoltaje(i, NULO);
+                agregarUnidadVoltaje(puntos, i, NULO);
             }
         }
     }
 
-    // 0 alterna entre alto y bajo, 1 es nulo
-    private void codificacionPseudoternaria(String bits) {
+    /**
+     * 0 alterna entre alto y bajo, 1 es nulo.
+     * @param puntos
+     * @param bits
+     */
+    private void codificacionPseudoternaria(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
         boolean voltajeEsAlto = false;
         for (int i = 0; i < bits.length(); i++) {
             if (bits.charAt(i) == '0') {
-                voltajeEsAlto = !voltajeEsAlto;
+                voltajeEsAlto = !voltajeEsAlto; // Cambio de voltaje
                 if (voltajeEsAlto) {
-                    agregarUnidadVoltaje(i, ALTO);
+                    agregarUnidadVoltaje(puntos, i, ALTO);
                 }
                 else {
-                    agregarUnidadVoltaje(i, BAJO);
+                    agregarUnidadVoltaje(puntos, i, BAJO);
                 }
             }
             else {
-                agregarUnidadVoltaje(i, NULO);
+                agregarUnidadVoltaje(puntos, i, NULO);
             }
         }
     }
 
-    // AMI, pero
-    // Si aparecen ocho ceros después de un positivo: 000+-0-+
-    // Si aparecen ocho ceros después de un negativo: 000-+0-+
-    private void codificacionB8ZS(String bits) {
+    /**
+     * AMI, pero
+     * Si aparecen ocho ceros después de un positivo: 000+-0-+
+     * Si aparecen ocho ceros después de un negativo: 000-+0-+
+     * @param puntos
+     * @param bits
+     */
+    private void codificacionB8ZS(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
         boolean voltajeEsAlto = false;
         int cerosAcumulados = 0;
         for (int i = 0; i < bits.length(); i++) {
@@ -173,79 +226,92 @@ public class GraficadorGestorModelo implements GraficadorModelo {
                 cerosAcumulados = 0;
                 voltajeEsAlto = !voltajeEsAlto;
                 if (voltajeEsAlto) {
-                    agregarUnidadVoltaje(i, ALTO);
+                    agregarUnidadVoltaje(puntos, i, ALTO);
                 }
                 else {
-                    agregarUnidadVoltaje(i, BAJO);
+                    agregarUnidadVoltaje(puntos, i, BAJO);
                 }
             }
             else {
                 cerosAcumulados++;
                 if (cerosAcumulados == 8) {
                     if (voltajeEsAlto) {
-                        modificarUnidadVoltaje(i - 4, ALTO);
-                        modificarUnidadVoltaje(i - 3, BAJO);
-                        modificarUnidadVoltaje(i - 1, BAJO);
-                        agregarUnidadVoltaje(i, ALTO);
+                        modificarUnidadVoltaje(puntos, i - 4, ALTO);
+                        modificarUnidadVoltaje(puntos, i - 3, BAJO);
+                        modificarUnidadVoltaje(puntos, i - 1, BAJO);
+                        agregarUnidadVoltaje(puntos, i, ALTO);
                     }
                     else {
-                        modificarUnidadVoltaje(i - 4, BAJO);
-                        modificarUnidadVoltaje(i - 3, ALTO);
-                        modificarUnidadVoltaje(i - 1, ALTO);
-                        agregarUnidadVoltaje(i, BAJO);
+                        modificarUnidadVoltaje(puntos, i - 4, BAJO);
+                        modificarUnidadVoltaje(puntos, i - 3, ALTO);
+                        modificarUnidadVoltaje(puntos, i - 1, ALTO);
+                        agregarUnidadVoltaje(puntos, i, BAJO);
                     }
                     cerosAcumulados = 0;
                 }
                 else {
-                    agregarUnidadVoltaje(i, NULO);
+                    agregarUnidadVoltaje(puntos, i, NULO);
                 }
             }
         }
     }
 
-    // 0 de alto a bajo, 1 de bajo a alto
-    private void codificacionManchester(String bits) {
+    /**
+     * 0 de alto a bajo, 1 de bajo a alto.
+     * @param puntos
+     * @param bits
+     */
+    private void codificacionManchester(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
         for (int i = 0; i < bits.length(); i++) {
             if (bits.charAt(i) == '1') {
-                agregarMitadVoltaje(i, BAJO);
-                agregarMitadVoltaje(i + 0.5f, ALTO);
+                agregarMitadVoltaje(puntos, i, BAJO);
+                agregarMitadVoltaje(puntos, i + 0.5f, ALTO);
             }
             else {
-                agregarMitadVoltaje(i, ALTO);
-                agregarMitadVoltaje(i + 0.5f, BAJO);
+                agregarMitadVoltaje(puntos, i, ALTO);
+                agregarMitadVoltaje(puntos, i + 0.5f, BAJO);
             }
         }
     }
 
-    // 0 cambia al inicio, 1 cambia a la mitad
-    private void codificacionManchesterDiferencial(String bits) {
+    /**
+     * 0 cambia al inicio, 1 cambia a la mitad.
+     * @param puntos
+     * @param bits
+     */
+    private void codificacionManchesterDiferencial(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
         boolean voltajeActual = true;
         for (int i = 0; i < bits.length(); i++) {
             if (bits.charAt(i) == '1') {
                 if (voltajeActual) {
-                    agregarMitadVoltaje(i, ALTO);
-                    agregarMitadVoltaje(i + 0.5f, BAJO);
+                    agregarMitadVoltaje(puntos, i, ALTO);
+                    agregarMitadVoltaje(puntos, i + 0.5f, BAJO);
                 }
                 else {
-                    agregarMitadVoltaje(i, BAJO);
-                    agregarMitadVoltaje(i + 0.5f, ALTO);
+                    agregarMitadVoltaje(puntos, i, BAJO);
+                    agregarMitadVoltaje(puntos, i + 0.5f, ALTO);
                 }
                 voltajeActual = !voltajeActual;
             }
             else {
                 if (voltajeActual) {
-                    agregarMitadVoltaje(i, BAJO);
-                    agregarMitadVoltaje(i + 0.5f, ALTO);
+                    agregarMitadVoltaje(puntos, i, BAJO);
+                    agregarMitadVoltaje(puntos, i + 0.5f, ALTO);
                 }
                 else {
-                    agregarMitadVoltaje(i, ALTO);
-                    agregarMitadVoltaje(i + 0.5f, BAJO);
+                    agregarMitadVoltaje(puntos, i, ALTO);
+                    agregarMitadVoltaje(puntos, i + 0.5f, BAJO);
                 }
             }
         }
     }
 
-    public StringProperty getEntradaBits() { return entradaBits; }
-    public StringProperty getTipoCodificacion() { return tipoCodificacion; }
-    public ListProperty<XYChart.Data<Double, Double>> getPuntosGrafica() { return puntosGrafica; }
+    @Override
+    public StringProperty entradaBitsProperty() { return entradaBits; }
+
+    @Override
+    public StringProperty tipoCodificacionProperty() { return tipoCodificacion; }
+
+    @Override
+    public ListProperty<XYChart.Data<Double, Double>> puntosGraficaProperty() { return puntosGrafica; }
 }

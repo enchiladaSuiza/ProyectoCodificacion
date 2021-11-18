@@ -5,6 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import modelosvista.PrincipalModeloVista;
 
+/**
+ * Acceso a los controladores y nodos padre de entrada, salida y gráfica.
+ * Tiene una referencia a EncargadoVistas para manipular los estilos.
+ */
 public class PrincipalControlador {
     private PrincipalModeloVista modeloVista;
 

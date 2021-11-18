@@ -9,6 +9,9 @@ import modelosvista.SalidaModeloVista;
 
 import java.util.Arrays;
 
+/**
+ * Comunicación directa con el archivo fxml de salida.
+ */
 public class SalidaControlador {
     private SalidaModeloVista modeloVista;
 
@@ -18,10 +21,14 @@ public class SalidaControlador {
     @FXML
     private TextArea salidaBinarioTextArea;
 
+    /**
+     * Enlaza las propiedades con las del modelo vista.
+     * @param modeloVista
+     */
     public void init(SalidaModeloVista modeloVista) {
         this.modeloVista = modeloVista;
-        salidaBinarioTextArea.textProperty().bindBidirectional(modeloVista.getSalidaBinario());
-        tipoCodificacionComboBox.valueProperty().bindBidirectional(modeloVista.getTipoCodificacion());
+        salidaBinarioTextArea.textProperty().bindBidirectional(modeloVista.salidaBinarioProperty());
+        tipoCodificacionComboBox.valueProperty().bindBidirectional(modeloVista.tipoCodificacionProperty());
         tipoCodificacionComboBox
                 .setItems(FXCollections.observableList(Arrays.asList(GraficadorModelo.codificaciones)));
         tipoCodificacionComboBox.getSelectionModel().selectFirst();

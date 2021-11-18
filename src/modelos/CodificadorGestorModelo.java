@@ -5,6 +5,9 @@ import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * Se encarga de convertir las entradas a sus respectivas formas en binario.
+ */
 public class CodificadorGestorModelo implements CodificadorModelo {
     private final StringProperty entradaBinario;
     private final LongProperty entradaNumero;
@@ -12,6 +15,9 @@ public class CodificadorGestorModelo implements CodificadorModelo {
     private final StringProperty tipoEntrada;
     private final StringProperty salidaBinario;
 
+    /**
+     * Inicializa las propiedades y asgina los listeners correspondientes.
+     */
     public CodificadorGestorModelo() {
         entradaBinario = new SimpleStringProperty();
         entradaNumero = new SimpleLongProperty();
@@ -53,6 +59,11 @@ public class CodificadorGestorModelo implements CodificadorModelo {
         });
     }
 
+    /**
+     * Devuelve la representación en binario de una cadena de texto.
+     * @param texto
+     * @return
+     */
     public String convertirTexto(String texto) {
         if (texto == null) {
             return "";
@@ -65,6 +76,11 @@ public class CodificadorGestorModelo implements CodificadorModelo {
         return binarioCompleto.toString();
     }
 
+    /**
+     * Devuelve la representación en binario de un número.
+     * @param numero
+     * @return
+     */
     public String convertirNumero(Long numero) {
         if (numero == null) {
             return "";
@@ -72,9 +88,28 @@ public class CodificadorGestorModelo implements CodificadorModelo {
         return Long.toBinaryString(numero);
     }
 
-    public StringProperty getEntradaBinario() { return entradaBinario; }
-    public LongProperty getEntradaNumero() { return entradaNumero; }
-    public StringProperty getEntradaTexto() { return entradaTexto; }
-    public StringProperty getTipoEntrada() { return tipoEntrada; }
-    public StringProperty getSalidaBinario() { return salidaBinario; }
+    @Override
+    public StringProperty entradaBinarioProperty() {
+        return entradaBinario;
+    }
+
+    @Override
+    public LongProperty entradaNumeroProperty() {
+        return entradaNumero;
+    }
+
+    @Override
+    public StringProperty entradaTextoProperty() {
+        return entradaTexto;
+    }
+
+    @Override
+    public StringProperty tipoEntradaProperty() {
+        return tipoEntrada;
+    }
+
+    @Override
+    public StringProperty salidaBinarioProperty() {
+        return salidaBinario;
+    }
 }

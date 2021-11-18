@@ -11,15 +11,21 @@ public class SalidaModeloVista {
     private StringProperty salidaBinario;
     private StringProperty tipoCodificacion;
 
+    /**
+     * Conecta las propiedades entre controlador y modelos.
+     * Modelos.
+     * @param codificadorModelo
+     * @param graficadorModelo
+     */
     public SalidaModeloVista(CodificadorModelo codificadorModelo, GraficadorModelo graficadorModelo) {
         this.modelo = codificadorModelo;
         salidaBinario = new SimpleStringProperty();
         tipoCodificacion = new SimpleStringProperty();
-        salidaBinario.bindBidirectional(codificadorModelo.getSalidaBinario());
-        salidaBinario.bindBidirectional(graficadorModelo.getEntradaBits());
-        tipoCodificacion.bindBidirectional(graficadorModelo.getTipoCodificacion());
+        salidaBinario.bindBidirectional(codificadorModelo.salidaBinarioProperty());
+        salidaBinario.bindBidirectional(graficadorModelo.entradaBitsProperty());
+        tipoCodificacion.bindBidirectional(graficadorModelo.tipoCodificacionProperty());
     }
 
-    public StringProperty getSalidaBinario() { return salidaBinario; }
-    public StringProperty getTipoCodificacion() { return tipoCodificacion; }
+    public StringProperty salidaBinarioProperty() { return salidaBinario; }
+    public StringProperty tipoCodificacionProperty() { return tipoCodificacion; }
 }

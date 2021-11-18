@@ -5,6 +5,9 @@ import modelosvista.GraficaModeloVista;
 import modelosvista.PrincipalModeloVista;
 import modelosvista.SalidaModeloVista;
 
+/**
+ * Clase que porta los modelos vista, para asegurar que sólo exista uno de cada uno.
+ */
 public class FabricaModelosVista {
     private PrincipalModeloVista principalModeloVista;
     private EntradaModeloVista entradaModeloVista;

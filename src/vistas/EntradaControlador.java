@@ -17,6 +17,9 @@ import modelosvista.EntradaModeloVista;
 
 import java.util.Arrays;
 
+/**
+ * Comunicación directa con el archivo fxml de entrada y sus nodos declardados.
+ */
 public class EntradaControlador {
     private EntradaModeloVista modeloVista;
 
@@ -31,6 +34,11 @@ public class EntradaControlador {
     private TextField entradaNumeroTextField;
     private TextArea entradaTextoTextArea;
 
+    /**
+     * Inicializa los nodos y listeners.
+     * Aquéllos que se agregarán programáticamente, según el tipo de entrada.
+     * @param modeloVista
+     */
     public void init(EntradaModeloVista modeloVista) {
         this.modeloVista = modeloVista;
         nodosVBox = entradaVBox.getChildren();
@@ -40,7 +48,7 @@ public class EntradaControlador {
         VBox.setVgrow(entradaBitsTextArea, Priority.ALWAYS);
         entradaBitsTextArea.textProperty().addListener(
                 (observableValue, anterior, nuevo) -> validarBinario(nuevo, entradaBitsTextArea));
-        entradaBitsTextArea.textProperty().bindBidirectional(modeloVista.getEntradaBinario());
+        entradaBitsTextArea.textProperty().bindBidirectional(modeloVista.entradaBinarioProperty());
 
         entradaNumeroTextField = new TextField();
         entradaNumeroTextField.setPrefWidth(200);
@@ -48,21 +56,25 @@ public class EntradaControlador {
         VBox.setMargin(entradaNumeroTextField, new Insets(10));
         entradaNumeroTextField.textProperty().addListener(
                 (observableValue, anterior, nuevo) -> validarNumero(nuevo, entradaNumeroTextField));
-        entradaNumeroTextField.textProperty().bindBidirectional(modeloVista.getEntradaNumero());
+        entradaNumeroTextField.textProperty().bindBidirectional(modeloVista.entradaNumeroProperty());
 
         entradaTextoTextArea = new TextArea();
         entradaTextoTextArea.setWrapText(true);
         VBox.setVgrow(entradaTextoTextArea, Priority.ALWAYS);
-        entradaTextoTextArea.textProperty().bindBidirectional(modeloVista.getEntradaTexto());
+        entradaTextoTextArea.textProperty().bindBidirectional(modeloVista.entradaTextoProperty());
 
         tipoEntradaComboBox
                 .setItems(FXCollections.observableList(Arrays.asList(CodificadorModelo.tiposEntradas)));
         tipoEntradaComboBox.valueProperty().addListener(
                 (observableValue, anterior, nuevo) -> cambioTipoDeEntrada(nuevo));
-        tipoEntradaComboBox.valueProperty().bindBidirectional(modeloVista.getTipoEntrada());
+        tipoEntradaComboBox.valueProperty().bindBidirectional(modeloVista.tipoEntradaProperty());
         tipoEntradaComboBox.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Quita el último nodo y agrega el nodo de captura de datos correspondiente.
+     * @param nuevoValor
+     */
     private void cambioTipoDeEntrada(String nuevoValor) {
         if (nodosVBox.size() > 1) { // Si sólo está el FlowPane con la Label y ComboBox, no quita nada
             nodosVBox.remove(nodosVBox.size() - 1);
@@ -78,15 +90,25 @@ public class EntradaControlador {
         }
     }
 
+    /**
+     * Reemplaza el texto por cadenas vacías sí no cumple como cadena válida binaria.
+     * @param valor
+     * @param nodoEntrada
+     */
     private void validarBinario(String valor, TextInputControl nodoEntrada) {
-        if (valor != null && !valor.matches("[01]+")) {
-            nodoEntrada.setText(valor.replaceAll("[^01]", ""));
+        if (valor != null && !valor.matches("[01]+")) { // 0 o 1, una o más veces
+            nodoEntrada.setText(valor.replaceAll("[^01]", "")); // Quita lo que no es 0 o 1
         }
     }
 
+    /**
+     * Reemplaza el texto por cadenas vacías si no cumple como cadena válida numérica.
+     * @param valor
+     * @param nodoEntrada
+     */
     private void validarNumero(String valor, TextInputControl nodoEntrada) {
-        if (valor != null && !valor.matches("\\d+")) {
-            nodoEntrada.setText(valor.replaceAll("\\D", ""));
+        if (valor != null && !valor.matches("\\d+")) { // Dígito cualquiera, una o más veces
+            nodoEntrada.setText(valor.replaceAll("\\D", "")); // Quita lo que no es dígito
         }
     }
 }

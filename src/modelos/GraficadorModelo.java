@@ -8,7 +8,7 @@ public interface GraficadorModelo {
     String[] codificaciones = { "Unipolar", "NRZ-L", "NRZ-I", "AMI", "Pseudoternaria", "B8ZS", "Manchester",
             "Manchester Diferencial" };
 
-    StringProperty getEntradaBits();
-    StringProperty getTipoCodificacion();
-    ListProperty<XYChart.Data<Double, Double>> getPuntosGrafica();
+    StringProperty entradaBitsProperty();
+    StringProperty tipoCodificacionProperty();
+    ListProperty<XYChart.Data<Double, Double>> puntosGraficaProperty();
 }

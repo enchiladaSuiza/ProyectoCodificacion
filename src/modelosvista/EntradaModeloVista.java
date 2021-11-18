@@ -13,15 +13,20 @@ public class EntradaModeloVista {
     private StringProperty entradaNumero;
     private StringProperty tipoEntrada;
 
+    /**
+     * Conecta las propiedades del controlador con el controlador.
+     * Por ahora su principal función es convertir la entrada de números.
+     * @param modelo
+     */
     public EntradaModeloVista(CodificadorModelo modelo) {
         this.modelo = modelo;
         entradaBinario = new SimpleStringProperty();
         entradaTexto = new SimpleStringProperty();
         entradaNumero = new SimpleStringProperty();
         tipoEntrada = new SimpleStringProperty();
-        entradaBinario.bindBidirectional(modelo.getEntradaBinario());
-        entradaTexto.bindBidirectional(modelo.getEntradaTexto());
-        entradaNumero.bindBidirectional(modelo.getEntradaNumero(), new StringConverter<>() {
+        entradaBinario.bindBidirectional(modelo.entradaBinarioProperty());
+        entradaTexto.bindBidirectional(modelo.entradaTextoProperty());
+        entradaNumero.bindBidirectional(modelo.entradaNumeroProperty(), new StringConverter<>() {
             @Override
             public String toString(Number number) {
                 return number.toString();
@@ -36,11 +41,11 @@ public class EntradaModeloVista {
                 }
             }
         });
-        tipoEntrada.bindBidirectional(modelo.getTipoEntrada());
+        tipoEntrada.bindBidirectional(modelo.tipoEntradaProperty());
     }
 
-    public StringProperty getEntradaNumero() { return entradaNumero; }
-    public StringProperty getEntradaBinario() { return entradaBinario; }
-    public StringProperty getEntradaTexto() { return entradaTexto; }
-    public StringProperty getTipoEntrada() { return tipoEntrada; }
+    public StringProperty entradaNumeroProperty() { return entradaNumero; }
+    public StringProperty entradaBinarioProperty() { return entradaBinario; }
+    public StringProperty entradaTextoProperty() { return entradaTexto; }
+    public StringProperty tipoEntradaProperty() { return tipoEntrada; }
 }

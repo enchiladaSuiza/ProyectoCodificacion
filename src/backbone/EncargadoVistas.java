@@ -14,6 +14,10 @@ import vistas.PrincipalControlador;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Se encarga de inicializar las vistas y sus respectivos controladores.
+ * También está a cargo de aplciar estilos css.
+ */
 public class EncargadoVistas {
     private final FabricaModelosVista fabricaModelosVista;
     private final String titulo = "Codificación Digital";
@@ -30,6 +34,11 @@ public class EncargadoVistas {
     private ArrayList<String> temas, acentos;
     private ObservableList<String> stylesheets;
 
+    /**
+     * Inicializa los estilos y los añade a sus respectivas listas, así como la escena y
+     * el ícono de la aplicación.
+     * @param fabricaModelosVista
+     */
     public EncargadoVistas(FabricaModelosVista fabricaModelosVista) {
         this.fabricaModelosVista = fabricaModelosVista;
 
@@ -56,14 +65,28 @@ public class EncargadoVistas {
         icono = new Image(getClass().getResourceAsStream(archivoIcono));
     }
 
+    /**
+     * Llama abrirVista con el archivo de la pantalla principal.
+     * @throws Exception
+     */
     public void abrirProgramaPrincipal() throws Exception {
         abrirVista(archivoPantallaPrincipal);
     }
 
+    /**
+     * Llama abrir vista con el archivo de la portada.
+     * @throws Exception
+     */
     public void abrirPortada() throws Exception {
         abrirVista(archivoPortada);
     }
 
+    /**
+     * Inicializa y muestra el archivo fxml que le es dado.
+     * Inicializa los controladores correspondienes.
+     * @param vista
+     * @throws IOException
+     */
     private void abrirVista(String vista) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(vista));
         Parent raiz = loader.load();
@@ -104,11 +127,17 @@ public class EncargadoVistas {
         }
     }
 
+    /**
+     * Añade el css del tema oscuro a la lista de estilos.
+     */
     public void aplicarTemaOscuro() {
         quitarTemas();
         stylesheets.add(temas.get(0));
     }
 
+    /**
+     * Quita los css destinados para temas de la lista de estilos.
+     */
     public void quitarTemas() {
         for (int i = 0; i < stylesheets.size(); i++) {
             if (temas.contains(stylesheets.get(i))) {
@@ -118,16 +147,25 @@ public class EncargadoVistas {
         }
     }
 
+    /**
+     * Añade el css del acento azul a la lista de estilos.
+     */
     public void aplicarAcentoAzul() {
         quitarAcentos();
         stylesheets.add(acentos.get(0));
     }
 
+    /**
+     * Añade el css del acento verde a la lista de estilos.
+     */
     public void aplicarAcentoVerde() {
         quitarAcentos();
         stylesheets.add(acentos.get(1));
     }
 
+    /**
+     * Quita los css destinados para los acentos de la lista de estilos.
+     */
     public void quitarAcentos() {
         for (int i = 0; i < stylesheets.size(); i++) {
             if (acentos.contains(stylesheets.get(i))) {
