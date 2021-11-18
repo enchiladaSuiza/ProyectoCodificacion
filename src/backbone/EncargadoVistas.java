@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import vistas.AcercaDeControlador;
 import vistas.PortadaControlador;
 import vistas.PrincipalControlador;
 import vistas.TutorialControlador;
@@ -22,14 +23,19 @@ import java.util.ArrayList;
 public class EncargadoVistas {
     private final FabricaModelosVista fabricaModelosVista;
     private final String titulo = "Codificación Digital";
+
     private final String archivoPantallaPrincipal = "../vistas/Principal.fxml";
     private final String archivoPortada = "../vistas/Portada.fxml";
     private final String archivoTutorial = "../vistas/Tutorial.fxml";
+    private final String archivoAcercaDe = "../vistas/AcercaDe.fxml";
+
     private final String archivoEstilosBase = "../vistas/css/estilosBase.css";
     private final String archivoTemaOscuro = "../vistas/css/temaOscuro.css";
     private final String archivoAcentoAzul = "../vistas/css/acentoAzul.css";
     private final String archivoAcentoVerde = "../vistas/css/acentoVerde.css";
+
     private final String archivoIcono = "../vistas/imagenes/icono.png";
+
     private Image icono;
     private Scene escena;
     private String estilosBase;
@@ -92,6 +98,14 @@ public class EncargadoVistas {
     }
 
     /**
+     * Llama abrirVista con el archivo del acerca de.
+     * @throws Exception
+     */
+    public void abrirAcercaDe() throws  Exception {
+        abrirVista(archivoAcercaDe);
+    }
+
+    /**
      * Inicializa y muestra el archivo fxml que le es dado.
      * Inicializa los controladores correspondienes.
      * @param vista
@@ -101,52 +115,46 @@ public class EncargadoVistas {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(vista));
         Parent raiz = loader.load();
         Stage escenario = new Stage();
-        Scene escena;
-        if (vista.equals(archivoPantallaPrincipal)) {
-            escena = new Scene(raiz, 600, 400);
-            this.escena = escena;
-            escena.getStylesheets().addAll(stylesheets);
+        Scene escena = new Scene(raiz);
+        escena.getStylesheets().addAll(stylesheets);
+        escenario.setScene(escena);
+        escenario.setTitle(titulo);
+        escenario.getIcons().add(icono);
 
-            escenario.setMinWidth(400);
-            escenario.setMinHeight(300);
-            escenario.setScene(escena);
-            escenario.setTitle(titulo);
-            escenario.getIcons().add(icono);
-            escenario.show();
+        switch (vista) {
+            case archivoPantallaPrincipal -> {
+                this.escena = escena;
 
-            PrincipalControlador controlador = loader.getController();
-            controlador.init(fabricaModelosVista.getPrincipalModeloVista(), this);
-            controlador.getEntradaController().init(fabricaModelosVista.getEntradaModeloVista());
-            controlador.getSalidaController().init(fabricaModelosVista.getSalidaModeloVista());
-            controlador.getGraficaController().init(fabricaModelosVista.getGraficaModeloVista());
-        }
+                escenario.setWidth(600);
+                escenario.setHeight(400);
+                escenario.setMinWidth(400);
+                escenario.setMinHeight(300);
+                escenario.show();
 
-        else if (vista.equals(archivoPortada)) {
-            escena = new Scene(raiz);
-            escena.getStylesheets().addAll(stylesheets);
+                PrincipalControlador controlador = loader.getController();
+                controlador.init(fabricaModelosVista.getPrincipalModeloVista(), this);
+                controlador.getEntradaController().init(fabricaModelosVista.getEntradaModeloVista());
+                controlador.getSalidaController().init(fabricaModelosVista.getSalidaModeloVista());
+                controlador.getGraficaController().init(fabricaModelosVista.getGraficaModeloVista());
+            }
+            case archivoPortada -> {
+                escenario.setMinWidth(750);
+                escenario.setMinHeight(445);
+                escenario.show();
 
-            escenario.setMinWidth(750);
-            escenario.setMinHeight(445);
-            escenario.setScene(escena);
-            escenario.setTitle(titulo);
-            escenario.getIcons().add(icono);
-            escenario.show();
-
-            PortadaControlador controlador = loader.getController();
-            controlador.init(this);
-        }
-
-        else if (vista.equals(archivoTutorial)) {
-            escena = new Scene(raiz);
-            escena.getStylesheets().addAll(stylesheets);
-
-            escenario.setScene(escena);
-            escenario.setTitle(titulo);
-            escenario.getIcons().add(icono);
-            escenario.show();
-
-            TutorialControlador controlador = loader.getController();
-            controlador.init(this);
+                PortadaControlador controlador = loader.getController();
+                controlador.init(this);
+            }
+            case archivoTutorial -> {
+                escenario.show();
+                TutorialControlador controlador = loader.getController();
+                controlador.init(this);
+            }
+            case archivoAcercaDe -> {
+                escenario.show();
+                AcercaDeControlador controlador = loader.getController();
+                controlador.init(this);
+            }
         }
     }
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" spacing="5.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.AcercaDeControlador">
+   <children>
+      <Label fx:id="tituloProyectoLabel" text="Codificación Digital" />
+      <Label text="Proyecto final para la materia de Comunicaciones en Redes" textAlignment="CENTER" wrapText="true" />
+      <Label text="Desarrollado por Diego Lienzo García, Javier Alejandro López Maldonado, Erick Cárdenas Martínez y Santiago Alonso Vergara Lorenzo" textAlignment="CENTER" wrapText="true" />
+      <Label text="Noviembre de 2021" />
+      <Label text="Licencia de dominio público" />
+      <Label text="Versión 1.0" />
+      <Label text="https://github.com/enchiladaSuiza/ProyectoCodificacion" textAlignment="CENTER" wrapText="true" />
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>

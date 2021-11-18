@@ -54,6 +54,10 @@ public class PrincipalControlador {
         encargadoVistas.abrirTutorial();
     }
 
+    public void mostrarAcercaDe() throws Exception {
+        encargadoVistas.abrirAcercaDe();
+    }
+
     public void alternarSimbolos() {
         graficaController.alternarSimbolos();
     }
