@@ -61,7 +61,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Ayuda">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Cómo usar" />
+                  <MenuItem mnemonicParsing="false" onAction="#mostrarTutorial" text="Cómo usar" />
                </items>
             </Menu>
         </menus>

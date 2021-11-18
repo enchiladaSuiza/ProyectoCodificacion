@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+
+<ScrollPane fx:id="scrollPane" fitToWidth="true" focusTraversable="false" prefHeight="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.TutorialControlador">
+   <content>
+      <VBox fx:id="vBox" alignment="TOP_CENTER" prefWidth="300.0" spacing="5.0">
+         <children>
+            <Label text="Primero elija el formato de los datos a codificar, ya sea directamente en binario, número o texto, mediante la ComboBox del espacio de entrda, en la parte superior izquierda de la ventana." wrapText="true" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/combobox_entrada.png" />
+               </image>
+            </ImageView>
+            <Label text="Ahora puede ingresar los datos en el campo del espacio de entrada. Note que sólo podrá escribir según el formato seleccionado." wrapText="true" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/input_entrada.png" />
+               </image>
+            </ImageView>
+            <Label text="Mientras escribe se dará cuenta que automáticamente se empezarán a traducir los datos de entrada a su versión en binario, en ceros y unos, en el espacio de salida en la parte superior derecha de la ventana." wrapText="true" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/bits_salida.png" />
+               </image>
+            </ImageView>
+            <Label text="También notará que la gráfica en la parte inferior de ventana empezará a mostrar los niveles de voltaje correspondientes a los bits de salida." wrapText="true" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/grafica.png" />
+               </image>
+            </ImageView>
+            <Label text="Para cambiar el código de líena usado para la graficación, selecciónelo de la ComoBox del espacio de salida." wrapText="true" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/combobox_codigos.png" />
+               </image>
+            </ImageView>
+            <Label text="Observará que la gráfica se adecuará al código de línea elegido." wrapText="true" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/grafica_ami.png" />
+               </image>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </content>
+</ScrollPane>

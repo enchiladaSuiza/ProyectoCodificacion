@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import vistas.PortadaControlador;
 import vistas.PrincipalControlador;
+import vistas.TutorialControlador;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class EncargadoVistas {
     private final String titulo = "Codificación Digital";
     private final String archivoPantallaPrincipal = "../vistas/Principal.fxml";
     private final String archivoPortada = "../vistas/Portada.fxml";
+    private final String archivoTutorial = "../vistas/Tutorial.fxml";
     private final String archivoEstilosBase = "../vistas/css/estilosBase.css";
     private final String archivoTemaOscuro = "../vistas/css/temaOscuro.css";
     private final String archivoAcentoAzul = "../vistas/css/acentoAzul.css";
@@ -74,11 +76,19 @@ public class EncargadoVistas {
     }
 
     /**
-     * Llama abrir vista con el archivo de la portada.
+     * Llama abrirVista con el archivo de la portada.
      * @throws Exception
      */
     public void abrirPortada() throws Exception {
         abrirVista(archivoPortada);
+    }
+
+    /**
+     * Llama abrirVista con el archivo del tutorial.
+     * @throws Exception
+     */
+    public void abrirTutorial() throws Exception {
+        abrirVista(archivoTutorial);
     }
 
     /**
@@ -123,6 +133,19 @@ public class EncargadoVistas {
             escenario.show();
 
             PortadaControlador controlador = loader.getController();
+            controlador.init(this);
+        }
+
+        else if (vista.equals(archivoTutorial)) {
+            escena = new Scene(raiz);
+            escena.getStylesheets().addAll(stylesheets);
+
+            escenario.setScene(escena);
+            escenario.setTitle(titulo);
+            escenario.getIcons().add(icono);
+            escenario.show();
+
+            TutorialControlador controlador = loader.getController();
             controlador.init(this);
         }
     }

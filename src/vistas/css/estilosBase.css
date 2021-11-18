@@ -4,6 +4,11 @@
     -fx-box-border: transparent;
 }
 
+.root:focused {
+    -fx-border-color: white;
+    -fx-box-border: white;
+}
+
 .text-field {
     -fx-background-color: transparent;
     -fx-border-color: #cccccc;

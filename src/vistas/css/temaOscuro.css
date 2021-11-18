@@ -1,5 +1,11 @@
 .root {
     -fx-background: #272822;
+    -fx-box-border: #272822;
+}
+
+.root:focused {
+    -fx-border-color: #272822;
+    -fx-box-border: #272822;
 }
 
 .text-area {
