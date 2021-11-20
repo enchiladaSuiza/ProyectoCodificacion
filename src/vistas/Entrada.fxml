@@ -11,7 +11,7 @@
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="20.0" minWidth="150.0" prefWrapLength="0.0">
          <children>
             <Label text="Entrada" />
-            <ComboBox fx:id="tipoEntradaComboBox" promptText="Tipo de entrada" />
+            <ComboBox fx:id="tipoEntradaComboBox" onKeyReleased="#enfocarInputControl" promptText="Tipo de entrada" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

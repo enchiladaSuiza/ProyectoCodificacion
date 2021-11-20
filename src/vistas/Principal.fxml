@@ -20,12 +20,12 @@
               <items>
                   <CheckMenuItem mnemonicParsing="false" onAction="#intercambiarCerosConUnos" text="Intercambiar ceros con unos">
                      <accelerator>
-                        <KeyCodeCombination alt="DOWN" code="I" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                        <KeyCodeCombination alt="UP" code="I" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </CheckMenuItem>
                   <CheckMenuItem mnemonicParsing="false" onAction="#alternarVoltajeInicial" text="Voltaje inicial alto">
                      <accelerator>
-                        <KeyCodeCombination alt="DOWN" code="V" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                        <KeyCodeCombination alt="UP" code="U" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </CheckMenuItem>
               </items>
@@ -63,13 +63,13 @@
                   </RadioMenuItem>
                   <RadioMenuItem mnemonicParsing="false" onAction="#aplicarAcentoVerde" text="Acento verde" toggleGroup="$acento">
                      <accelerator>
-                        <KeyCodeCombination alt="DOWN" code="G" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                        <KeyCodeCombination alt="DOWN" code="V" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </RadioMenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <CheckMenuItem onAction="#alternarSimbolos" text="Mostrar símbolos">
                      <accelerator>
-                        <KeyCodeCombination alt="DOWN" code="S" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                        <KeyCodeCombination alt="DOWN" code="M" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></CheckMenuItem>
             </items>
           </Menu>

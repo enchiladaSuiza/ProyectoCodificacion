@@ -2,6 +2,7 @@ package vistas;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -9,6 +10,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -69,6 +74,13 @@ public class EntradaControlador {
                 (observableValue, anterior, nuevo) -> cambioTipoDeEntrada(nuevo));
         tipoEntradaComboBox.valueProperty().bindBidirectional(modeloVista.tipoEntradaProperty());
         tipoEntradaComboBox.getSelectionModel().selectFirst();
+
+        KeyCombination abrirComboBoxCombinacion = new KeyCodeCombination(KeyCode.E, KeyCombination.ALT_DOWN);
+        tipoEntradaComboBox.getScene().addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
+            if (abrirComboBoxCombinacion.match(keyEvent)) {
+                tipoEntradaComboBox.show();
+            }
+        });
     }
 
     /**
@@ -109,6 +121,17 @@ public class EntradaControlador {
     private void validarNumero(String valor, TextInputControl nodoEntrada) {
         if (valor != null && !valor.matches("\\d+")) { // Dígito cualquiera, una o más veces
             nodoEntrada.setText(valor.replaceAll("\\D", "")); // Quita lo que no es dígito
+        }
+    }
+
+    public void enfocarInputControl(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+            int indice = tipoEntradaComboBox.getSelectionModel().getSelectedIndex();
+            switch (indice) {
+                case 0 -> entradaBitsTextArea.requestFocus();
+                case 1 -> entradaNumeroTextField.requestFocus();
+                case 2 -> entradaTextoTextArea.requestFocus();
+            }
         }
     }
 }
