@@ -1,10 +1,12 @@
 package vistas;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Region;
 import modelosvista.GraficaModeloVista;
 
@@ -27,7 +29,8 @@ public class GraficaControlador {
     private NumberAxis ejeY;
 
     private XYChart.Series<Double, Double> serie;
-    private final int anchoMinVoltaje = 10;
+    public final int ANCHO_MIN_VOLTAJE = 5;
+    private int anchoVoltaje = ANCHO_MIN_VOLTAJE;
 
     /**
      * Enlaza las propiedades con las del modelo vista.
@@ -52,8 +55,8 @@ public class GraficaControlador {
         double maximoAbscisas = modeloVista.valorMaximoAbscisas();
         ejeX.setUpperBound(maximoAbscisas);
         double relacionAnchoValores = grafica.getScene().getWidth() / maximoAbscisas;
-        if (relacionAnchoValores < anchoMinVoltaje) {
-            grafica.setPrefWidth(anchoMinVoltaje * maximoAbscisas);
+        if (relacionAnchoValores < anchoVoltaje) {
+            grafica.setPrefWidth(anchoVoltaje * maximoAbscisas);
             scrollPane.setFitToWidth(false);
         }
         else {
@@ -75,5 +78,13 @@ public class GraficaControlador {
 
     public void alternarVoltajePorDefecto() {
         modeloVista.alternarVoltajePorDefecto();
+    }
+
+    public void ajustarZoomGrafica(ScrollEvent scrollEvent) {
+        anchoVoltaje += scrollEvent.getTextDeltaY();
+        if (anchoVoltaje <= ANCHO_MIN_VOLTAJE) {
+            anchoVoltaje = ANCHO_MIN_VOLTAJE;
+        }
+        ajustarAnchoGrafica();
     }
 }

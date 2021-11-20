@@ -5,8 +5,8 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.ScrollPane?>
 
-<ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.GraficaControlador">
-  <LineChart fx:id="grafica" alternativeRowFillVisible="false" animated="false" createSymbols="false" horizontalGridLinesVisible="false" legendVisible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" verticalZeroLineVisible="false">
+<ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" minHeight="120.0" pannable="true" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.GraficaControlador">
+  <LineChart fx:id="grafica" alternativeRowFillVisible="false" animated="false" createSymbols="false" horizontalGridLinesVisible="false" legendVisible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="60.0" onScroll="#ajustarZoomGrafica" verticalZeroLineVisible="false">
     <xAxis>
       <NumberAxis fx:id="ejeX" animated="false" autoRanging="false" minorTickCount="2" minorTickLength="2.0" side="BOTTOM" tickUnit="1.0" upperBound="1.0">
             <opaqueInsets>
