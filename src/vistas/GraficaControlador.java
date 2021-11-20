@@ -68,4 +68,12 @@ public class GraficaControlador {
     public void alternarSimbolos() {
         grafica.setCreateSymbols(!grafica.getCreateSymbols());
     }
+
+    public void intercambiarCerosConUnos() {
+        modeloVista.intercambiarCerosConUnos();
+    }
+
+    public void alternarVoltajePorDefecto() {
+        modeloVista.alternarVoltajePorDefecto();
+    }
 }

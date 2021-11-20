@@ -55,5 +55,13 @@ public class GraficaModeloVista {
         return limiteSuperior;
     }
 
+    public void intercambiarCerosConUnos() {
+        graficadorModelo.intercambiarCerosConUnos();
+    }
+
+    public void alternarVoltajePorDefecto() {
+        graficadorModelo.alternarVoltajePorDefecto();
+    }
+
     public ListProperty<XYChart.Data<Double, Double>> puntosGraficaProperty() { return puntosGrafica; }
 }

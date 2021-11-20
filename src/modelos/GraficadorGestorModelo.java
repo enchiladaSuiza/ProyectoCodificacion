@@ -15,13 +15,14 @@ import java.util.List;
  * Es el que implementa los códigos de línea en sí.
  */
 public class GraficadorGestorModelo implements GraficadorModelo {
-    private float ALTO = 0.9f;
-    private float NULO = 0;
-    private float BAJO = -0.9f;
-
     private StringProperty entradaBits;
     private StringProperty tipoCodificacion;
     private ListProperty<XYChart.Data<Double, Double>> puntosGrafica;
+
+    private char _uno = UNO;
+    private char _cero = CERO;
+
+    private boolean voltajePorDefecto = VOLTAJE_POR_DEFECTO;
 
     /**
      * Inicializa las propiedades y adhiere listeners.
@@ -131,7 +132,7 @@ public class GraficadorGestorModelo implements GraficadorModelo {
      */
     private void codificacionUnipolar(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
         for (int i = 0; i < bits.length(); i++) {
-            if (bits.charAt(i) == '1') {
+            if (bits.charAt(i) == _uno) {
                 agregarUnidadVoltaje(puntos, i, ALTO);
             }
             else {
@@ -147,7 +148,7 @@ public class GraficadorGestorModelo implements GraficadorModelo {
      */
     private void codificacionNRZL(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
         for (int i = 0; i < bits.length(); i++) {
-            if (bits.charAt(i) == '1') {
+            if (bits.charAt(i) == _uno) {
                 agregarUnidadVoltaje(puntos, i, BAJO);
             }
             else {
@@ -162,9 +163,9 @@ public class GraficadorGestorModelo implements GraficadorModelo {
      * @param bits
      */
     private void codificacionNRZI(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
-        boolean voltajeEsAlto = false;
+        boolean voltajeEsAlto = voltajePorDefecto;
         for (int i = 0; i < bits.length(); i++) {
-            if (bits.charAt(i) == '1') { // Cuando me encuentro con unos cambio de voltaje.
+            if (bits.charAt(i) == _uno) { // Cuando me encuentro con unos cambio de voltaje.
                 voltajeEsAlto = !voltajeEsAlto;
             }
             if (voltajeEsAlto) {
@@ -183,7 +184,7 @@ public class GraficadorGestorModelo implements GraficadorModelo {
      */
     private void codificacionRZ(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
         for (int i = 0; i < bits.length(); i++) {
-            if (bits.charAt(i) == '1') {
+            if (bits.charAt(i) == _uno) {
                 agregarMitadVoltaje(puntos, i, ALTO);
             }
             else {
@@ -199,9 +200,9 @@ public class GraficadorGestorModelo implements GraficadorModelo {
      * @param bits
      */
     private void codificacionAMI(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
-        boolean voltajeEsAlto = false;
+        boolean voltajeEsAlto = voltajePorDefecto;
         for (int i = 0; i < bits.length(); i++) {
-            if (bits.charAt(i) == '1') {
+            if (bits.charAt(i) == _uno) {
                 voltajeEsAlto = !voltajeEsAlto; // Cambio de voltaje
                 if (voltajeEsAlto) {
                     agregarUnidadVoltaje(puntos, i, ALTO);
@@ -222,9 +223,9 @@ public class GraficadorGestorModelo implements GraficadorModelo {
      * @param bits
      */
     private void codificacionPseudoternaria(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
-        boolean voltajeEsAlto = false;
+        boolean voltajeEsAlto = voltajePorDefecto;
         for (int i = 0; i < bits.length(); i++) {
-            if (bits.charAt(i) == '0') {
+            if (bits.charAt(i) == _cero) {
                 voltajeEsAlto = !voltajeEsAlto; // Cambio de voltaje
                 if (voltajeEsAlto) {
                     agregarUnidadVoltaje(puntos, i, ALTO);
@@ -247,10 +248,10 @@ public class GraficadorGestorModelo implements GraficadorModelo {
      * @param bits
      */
     private void codificacionB8ZS(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
-        boolean voltajeEsAlto = false;
+        boolean voltajeEsAlto = voltajePorDefecto;
         int cerosAcumulados = 0;
         for (int i = 0; i < bits.length(); i++) {
-            if (bits.charAt(i) == '1') {
+            if (bits.charAt(i) == _uno) {
                 cerosAcumulados = 0;
                 voltajeEsAlto = !voltajeEsAlto;
                 if (voltajeEsAlto) {
@@ -292,10 +293,10 @@ public class GraficadorGestorModelo implements GraficadorModelo {
      * @param bits
      */
     private void codificacionB6ZS(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
-        boolean voltajeEsAlto = false;
+        boolean voltajeEsAlto = voltajePorDefecto;
         int cerosAcumulados = 0;
         for (int i = 0; i < bits.length(); i++) {
-            if (bits.charAt(i) == '1') {
+            if (bits.charAt(i) == _uno) {
                 cerosAcumulados = 0;
                 voltajeEsAlto = !voltajeEsAlto;
                 if (voltajeEsAlto) {
@@ -340,11 +341,11 @@ public class GraficadorGestorModelo implements GraficadorModelo {
      * @param bits
      */
     private void codificacionB3ZS(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
-        boolean voltajeEsAlto = false;
+        boolean voltajeEsAlto = voltajePorDefecto;
         int cerosAcumulados = 0;
         int unosAcumulados = 0;
         for (int i = 0; i < bits.length(); i++) {
-            if (bits.charAt(i) == '1') {
+            if (bits.charAt(i) == _uno) {
                 unosAcumulados++;
                 cerosAcumulados = 0;
                 voltajeEsAlto = !voltajeEsAlto; // Cambio de voltaje
@@ -397,11 +398,11 @@ public class GraficadorGestorModelo implements GraficadorModelo {
      * @param bits
      */
     private void codificacionHDB3(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
-        boolean voltajeEsAlto = false;
+        boolean voltajeEsAlto = voltajePorDefecto;
         int cerosAcumulados = 0;
         int unosAcumulados = 0;
         for (int i = 0; i < bits.length(); i++) {
-            if (bits.charAt(i) == '1') {
+            if (bits.charAt(i) == _uno) {
                 unosAcumulados++;
                 cerosAcumulados = 0;
                 voltajeEsAlto = !voltajeEsAlto; // Cambio de voltaje
@@ -450,7 +451,7 @@ public class GraficadorGestorModelo implements GraficadorModelo {
      */
     private void codificacionManchester(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
         for (int i = 0; i < bits.length(); i++) {
-            if (bits.charAt(i) == '1') {
+            if (bits.charAt(i) == _uno) {
                 agregarMitadVoltaje(puntos, i, BAJO);
                 agregarMitadVoltaje(puntos, i + 0.5f, ALTO);
             }
@@ -467,9 +468,9 @@ public class GraficadorGestorModelo implements GraficadorModelo {
      * @param bits
      */
     private void codificacionManchesterDiferencial(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
-        boolean voltajeActual = true;
+        boolean voltajeActual = voltajePorDefecto;
         for (int i = 0; i < bits.length(); i++) {
-            if (bits.charAt(i) == '1') {
+            if (bits.charAt(i) == _uno) {
                 if (voltajeActual) {
                     agregarMitadVoltaje(puntos, i, ALTO);
                     agregarMitadVoltaje(puntos, i + 0.5f, BAJO);
@@ -493,6 +494,18 @@ public class GraficadorGestorModelo implements GraficadorModelo {
         }
     }
 
+    public void intercambiarCerosConUnos() {
+        char temporal = _uno;
+        _uno = _cero;
+        _cero = temporal;
+        actualizarDatos(entradaBits.get(), tipoCodificacion.get());
+    }
+
+    public void alternarVoltajePorDefecto() {
+        voltajePorDefecto = !voltajePorDefecto;
+        actualizarDatos(entradaBits.get(), tipoCodificacion.get());
+    }
+    
     @Override
     public StringProperty entradaBitsProperty() { return entradaBits; }
 

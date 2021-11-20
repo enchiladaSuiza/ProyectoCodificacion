@@ -62,6 +62,14 @@ public class PrincipalControlador {
         graficaController.alternarSimbolos();
     }
 
+    public void intercambiarCerosConUnos() {
+        graficaController.intercambiarCerosConUnos();
+    }
+
+    public void alternarVoltajeInicial() {
+        graficaController.alternarVoltajePorDefecto();
+    }
+
     public EntradaControlador getEntradaController() {
         return entradaController;
     }
