@@ -5,8 +5,8 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.chart.XYChart;
 
 public interface GraficadorModelo {
-    String[] codificaciones = { "Unipolar", "NRZ-L", "NRZ-I", "AMI", "Pseudoternaria", "B8ZS", "Manchester",
-            "Manchester Diferencial" };
+    String[] codificaciones = { "Unipolar", "NRZ-L", "NRZ-I", "RZ", "AMI", "Pseudoternaria", "B8ZS", "B6ZS", "B3ZS",
+            "HDB3", "Manchester", "Manchester Diferencial" };
 
     StringProperty entradaBitsProperty();
     StringProperty tipoCodificacionProperty();

@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 
 import java.util.ArrayList;
@@ -96,18 +95,30 @@ public class GraficadorGestorModelo implements GraficadorModelo {
                 codificacionNRZI(puntos, bits);
             }
             else if (tipoCodificacion.equals(codificaciones[3])) {
-                codificacionAMI(puntos, bits);
+                codificacionRZ(puntos, bits);
             }
             else if (tipoCodificacion.equals(codificaciones[4])) {
-                codificacionPseudoternaria(puntos, bits);
+                codificacionAMI(puntos, bits);
             }
             else if (tipoCodificacion.equals(codificaciones[5])) {
-                codificacionB8ZS(puntos, bits);
+                codificacionPseudoternaria(puntos, bits);
             }
             else if (tipoCodificacion.equals(codificaciones[6])) {
-                codificacionManchester(puntos, bits);
+                codificacionB8ZS(puntos, bits);
             }
             else if (tipoCodificacion.equals(codificaciones[7])) {
+                codificacionB6ZS(puntos, bits);
+            }
+            else if (tipoCodificacion.equals(codificaciones[8])) {
+                codificacionB3ZS(puntos, bits);
+            }
+            else if (tipoCodificacion.equals(codificaciones[9])) {
+                codificacionHDB3(puntos, bits);
+            }
+            else if (tipoCodificacion.equals(codificaciones[10])) {
+                codificacionManchester(puntos, bits);
+            }
+            else if (tipoCodificacion.equals(codificaciones[11])) {
                 codificacionManchesterDiferencial(puntos, bits);
             }
         }
@@ -162,6 +173,23 @@ public class GraficadorGestorModelo implements GraficadorModelo {
             else {
                 agregarUnidadVoltaje(puntos, i, BAJO);
             }
+        }
+    }
+
+    /**
+     * 1 de alto a nulo, 0 de bajo a nulo
+     * @param puntos
+     * @param bits
+     */
+    private void codificacionRZ(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
+        for (int i = 0; i < bits.length(); i++) {
+            if (bits.charAt(i) == '1') {
+                agregarMitadVoltaje(puntos, i, ALTO);
+            }
+            else {
+                agregarMitadVoltaje(puntos, i, BAJO);
+            }
+            agregarMitadVoltaje(puntos, i + 0.5, NULO);
         }
     }
 
@@ -248,6 +276,165 @@ public class GraficadorGestorModelo implements GraficadorModelo {
                         agregarUnidadVoltaje(puntos, i, BAJO);
                     }
                     cerosAcumulados = 0;
+                }
+                else {
+                    agregarUnidadVoltaje(puntos, i, NULO);
+                }
+            }
+        }
+    }
+
+    /**
+     * AMI, pero
+     * Si aparecen seis ceros después de un positivo: 0+-0-+
+     * Si aparecen seis ceros después de un negativo: 0-+0-+
+     * @param puntos
+     * @param bits
+     */
+    private void codificacionB6ZS(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
+        boolean voltajeEsAlto = false;
+        int cerosAcumulados = 0;
+        for (int i = 0; i < bits.length(); i++) {
+            if (bits.charAt(i) == '1') {
+                cerosAcumulados = 0;
+                voltajeEsAlto = !voltajeEsAlto;
+                if (voltajeEsAlto) {
+                    agregarUnidadVoltaje(puntos, i, ALTO);
+                }
+                else {
+                    agregarUnidadVoltaje(puntos, i, BAJO);
+                }
+            }
+            else {
+                cerosAcumulados++;
+                if (cerosAcumulados == 6) {
+                    if (voltajeEsAlto) {
+                        modificarUnidadVoltaje(puntos, i - 4, ALTO);
+                        modificarUnidadVoltaje(puntos, i - 3, BAJO);
+                        modificarUnidadVoltaje(puntos, i - 1, BAJO);
+                        agregarUnidadVoltaje(puntos, i, ALTO);
+                    }
+                    else {
+                        modificarUnidadVoltaje(puntos, i - 4, BAJO);
+                        modificarUnidadVoltaje(puntos, i - 3, ALTO);
+                        modificarUnidadVoltaje(puntos, i - 1, ALTO);
+                        agregarUnidadVoltaje(puntos, i, BAJO);
+                    }
+                    cerosAcumulados = 0;
+                }
+                else {
+                    agregarUnidadVoltaje(puntos, i, NULO);
+                }
+            }
+        }
+    }
+
+    /**
+     * AMI, pero
+     * Si aparecen tres ceros, serán reemplazados según
+     * Polaridad del pulso anterior     Número de 1 desde la última substitución
+     *                                      Impar               Par
+     *              -                       00-                 +0+
+     *              +                       00+                 -0-
+     * @param puntos
+     * @param bits
+     */
+    private void codificacionB3ZS(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
+        boolean voltajeEsAlto = false;
+        int cerosAcumulados = 0;
+        int unosAcumulados = 0;
+        for (int i = 0; i < bits.length(); i++) {
+            if (bits.charAt(i) == '1') {
+                unosAcumulados++;
+                cerosAcumulados = 0;
+                voltajeEsAlto = !voltajeEsAlto; // Cambio de voltaje
+                if (voltajeEsAlto) {
+                    agregarUnidadVoltaje(puntos, i, ALTO);
+                } else {
+                    agregarUnidadVoltaje(puntos, i, BAJO);
+                }
+            }
+            else {
+                cerosAcumulados++;
+                if (cerosAcumulados == 3) {
+                    if (unosAcumulados % 2 == 0) { // # par de unos anteriores
+                        if (voltajeEsAlto) { // Se quedó en +
+                            modificarUnidadVoltaje(puntos, i - 2, BAJO);
+                            agregarUnidadVoltaje(puntos, i, BAJO);
+                        }
+                        else { // Se quedó en -
+                            modificarUnidadVoltaje(puntos, i - 2, ALTO);
+                            agregarUnidadVoltaje(puntos, i, ALTO);
+                        }
+                        voltajeEsAlto = !voltajeEsAlto;
+                    }
+                    else { // # impar de unos anteriores
+                        if (voltajeEsAlto) { // Se quedó en +
+                            agregarUnidadVoltaje(puntos, i, ALTO);
+                        }
+                        else { // Se quedó en -
+                            agregarUnidadVoltaje(puntos, i, BAJO);
+                        }
+                    }
+                    cerosAcumulados = 0;
+                    unosAcumulados = 0;
+                }
+                else {
+                    agregarUnidadVoltaje(puntos, i, NULO);
+                }
+            }
+        }
+    }
+
+    /**
+     * AMI, pero
+     * Si aparecen cuatro ceros, serán reemplazados según
+     * Polaridad del pulso anterior     Número de 1 desde la última substitución
+     *                                      Impar               Par
+     *              -                       000-                +00+
+     *              +                       000+                -00-
+     * @param puntos
+     * @param bits
+     */
+    private void codificacionHDB3(ArrayList<XYChart.Data<Double, Double>> puntos, String bits) {
+        boolean voltajeEsAlto = false;
+        int cerosAcumulados = 0;
+        int unosAcumulados = 0;
+        for (int i = 0; i < bits.length(); i++) {
+            if (bits.charAt(i) == '1') {
+                unosAcumulados++;
+                cerosAcumulados = 0;
+                voltajeEsAlto = !voltajeEsAlto; // Cambio de voltaje
+                if (voltajeEsAlto) {
+                    agregarUnidadVoltaje(puntos, i, ALTO);
+                } else {
+                    agregarUnidadVoltaje(puntos, i, BAJO);
+                }
+            }
+            else {
+                cerosAcumulados++;
+                if (cerosAcumulados == 4) {
+                    if (unosAcumulados % 2 == 0) { // # par de unos anteriores
+                        if (voltajeEsAlto) { // Se quedó en +
+                            modificarUnidadVoltaje(puntos, i - 3, BAJO);
+                            agregarUnidadVoltaje(puntos, i, BAJO);
+                        }
+                        else { // Se quedó en -
+                            modificarUnidadVoltaje(puntos, i - 3, ALTO);
+                            agregarUnidadVoltaje(puntos, i, ALTO);
+                        }
+                        voltajeEsAlto = !voltajeEsAlto;
+                    }
+                    else { // # impar de unos anteriores
+                        if (voltajeEsAlto) { // Se quedó en +
+                            agregarUnidadVoltaje(puntos, i, ALTO);
+                        }
+                        else { // Se quedó en -
+                            agregarUnidadVoltaje(puntos, i, BAJO);
+                        }
+                    }
+                    cerosAcumulados = 0;
+                    unosAcumulados = 0;
                 }
                 else {
                     agregarUnidadVoltaje(puntos, i, NULO);
