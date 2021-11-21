@@ -16,12 +16,6 @@ public class TutorialControlador {
     private ScrollPane scrollPane;
 
     public void init(EncargadoVistas encargadoVistas) {
-        String vBoxCss = """
-                -fx-border-color: transparent;
-                -fx-box-border: transparent;
-                -fx-background-color: transparent;
-                """;
-//        vBox.setStyle(vBoxCss);
-//        scrollPane.setStyle(vBoxCss);
+
     }
 }

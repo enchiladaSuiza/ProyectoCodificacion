@@ -8,10 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import vistas.AcercaDeControlador;
-import vistas.PortadaControlador;
-import vistas.PrincipalControlador;
-import vistas.TutorialControlador;
+import vistas.*;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -26,10 +23,11 @@ public class EncargadoVistas {
     private final FabricaModelosVista fabricaModelosVista;
     private final String titulo = "Codificación Digital";
 
-    private final String archivoPantallaPrincipal = "../vistas/Principal.fxml";
-    private final String archivoPortada = "../vistas/Portada.fxml";
-    private final String archivoTutorial = "../vistas/Tutorial.fxml";
-    private final String archivoAcercaDe = "../vistas/AcercaDe.fxml";
+    private final String archivoPantallaPrincipal = "../vistas/fxml/Principal.fxml";
+    private final String archivoPortada = "../vistas/fxml/Portada.fxml";
+    private final String archivoTutorial = "../vistas/fxml/Tutorial.fxml";
+    private final String archivoAcercaDe = "../vistas/fxml/AcercaDe.fxml";
+    private final String archivoIntro  = "../vistas/fxml/Intro.fxml";
 
     private final String archivoEstilosBase = "../vistas/css/estilosBase.css";
     private final String archivoTemaOscuro = "../vistas/css/temaOscuro.css";
@@ -109,8 +107,12 @@ public class EncargadoVistas {
      * Llama abrirVista con el archivo del acerca de.
      * @throws Exception
      */
-    public void abrirAcercaDe() throws  Exception {
+    public void abrirAcercaDe() throws Exception {
         abrirVista(archivoAcercaDe);
+    }
+
+    public void abrirIntro() throws Exception {
+        abrirVista(archivoIntro);
     }
 
     /**
@@ -167,6 +169,13 @@ public class EncargadoVistas {
                 AcercaDeControlador controlador = loader.getController();
                 controlador.init(this);
             }
+            case archivoIntro -> {
+                escenario.setMinWidth(180);
+                escenario.setMinHeight(100);
+                escenario.show();
+                IntroControlador controlador = loader.getController();
+                controlador.init(this);
+            }
         }
     }
 
@@ -219,18 +228,30 @@ public class EncargadoVistas {
     }
 
     public void agrandarLetra() {
-        letraCss = ".root { -fx-font-size: " + ++fontSize + "pt; }";
-        stylesheets.remove(archivoLetraCss);
-        archivoLetraCss = "data:text/css;base64," +
-                Base64.getEncoder().encodeToString(letraCss.getBytes(StandardCharsets.UTF_8));
-        stylesheets.add(archivoLetraCss);
+        fontSize++;
+        if (fontSize < 25) {
+            letraCss = ".root { -fx-font-size: " + fontSize + "pt; }";
+            stylesheets.remove(archivoLetraCss);
+            archivoLetraCss = "data:text/css;base64," +
+                    Base64.getEncoder().encodeToString(letraCss.getBytes(StandardCharsets.UTF_8));
+            stylesheets.add(archivoLetraCss);
+        }
+        else {
+            fontSize--;
+        }
     }
 
     public void menguarLetra() {
-        letraCss = ".root { -fx-font-size: " + --fontSize + "pt; }";
-        stylesheets.remove(archivoLetraCss);
-        archivoLetraCss = "data:text/css;base64," +
-                Base64.getEncoder().encodeToString(letraCss.getBytes(StandardCharsets.UTF_8));
-        stylesheets.add(archivoLetraCss);
+        fontSize--;
+        if (fontSize > 0) {
+            letraCss = ".root { -fx-font-size: " + --fontSize + "pt; }";
+            stylesheets.remove(archivoLetraCss);
+            archivoLetraCss = "data:text/css;base64," +
+                    Base64.getEncoder().encodeToString(letraCss.getBytes(StandardCharsets.UTF_8));
+            stylesheets.add(archivoLetraCss);
+        }
+        else {
+            fontSize++;
+        }
     }
 }

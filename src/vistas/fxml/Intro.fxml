@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fx:id="scrollPane" fitToWidth="true" focusTraversable="false" prefHeight="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.IntroControlador">
+    <content>
+        <VBox fx:id="vBox" alignment="TOP_CENTER" prefWidth="300.0" spacing="5.0">
+            <children>
+                <Label text="La codificación es el proceso de conversión de un sistema de datos a otro, donde la información resultante deberá ser equivalente a la información de origen. La codificación digital consiste en la traducción de los valores de tensión eléctrica análogicos al sistema binario, mediante códigos preestablecidos. La señal analógica será tansformada en una serie de impulsos digitales, es decir, en ceros y unos." wrapText="true" />
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../imagenes/digital_signal.png" />
+                    </image>
+                </ImageView>
+                <Label text="Los códigos de línea son los patrones de voltaje, corriente o fotones usados para representar esta información digital, permitiendo que sea enviada mediante una línea de transmisión. Algunas señales son más propensas a errores que otras, debido a las características físicas de la comunicación o medio de almacenamiento." wrapText="true" />
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../imagenes/medios_transmision.jpg" />
+                    </image>
+                </ImageView>
+                <Label text="Después de la codificación de línea, la señal se coloca a través de un medio de comunicación físico, ya sea un medio de transmisión o un medio de almacenamiento de datos. Los canales físicos más comunes son:" wrapText="true" />
+                <Label text="• Directamente en una línea de transmisión, en la forma de variaciones de voltaje o corriente." textAlignment="CENTER" wrapText="true" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/digital_signal_2.png" />
+               </image>
+            </ImageView>
+                <Label text="• La señal se somete a una nueva estructura de impulsos y luego se modula para crear una señal de radio frecuencia que puede ser enviada a través del espacio libre." textAlignment="CENTER" wrapText="true" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/radio_frecuencia.png" />
+               </image>
+            </ImageView>
+            <Label text="• La señal se puede usar para encender y apagar una fuente de luz en la comunicación óptica por espacio libre, como en los controles remotos." textAlignment="CENTER" wrapText="true" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/optica_libre.png" />
+               </image>
+            </ImageView>
+            <Label text="• Impresa en papel para crear un código de barras." textAlignment="CENTER" wrapText="true" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/codigo_barras.png" />
+               </image>
+            </ImageView>
+            <Label text="• Convertida en puntos magnetizados en una unidad de disco duro o cinta." textAlignment="CENTER" wrapText="true" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/disco_duro.png" />
+               </image>
+            </ImageView>
+            <Label text="• Convertida en perforaciones en un disco óptico." textAlignment="CENTER" wrapText="true" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/cd.png" />
+               </image>
+            </ImageView>
+            <Label text="En resumen, la codificación es el proceso de convertir los datos a una determinada secuencia de caracteres, símbolos, alfabetos, etc., en un formato específico, para la transmisión segura de datos." wrapText="true" />
+            </children>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </VBox>
+    </content>
+</ScrollPane>
