@@ -12,7 +12,7 @@
       <FlowPane alignment="TOP_CENTER" columnHalignment="CENTER" hgap="20.0" minWidth="230.0">
          <children>
             <Label text="Salida" />
-            <ComboBox fx:id="tipoCodificacionComboBox" promptText="Codificación" visibleRowCount="20" />
+            <ComboBox fx:id="tipoCodificacionComboBox" minWidth="200.0" promptText="Codificación" visibleRowCount="20" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

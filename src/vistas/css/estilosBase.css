@@ -1,7 +1,7 @@
 .root {
     -fx-font-family: "Verdana";
     -fx-background: white;
-    -fx-box-border: transparent;
+    -fx-box-border: transparent; 
 }
 
 .root:focused {
@@ -145,6 +145,6 @@
 }
 
 #tituloProyectoLabel {
-    -fx-font-size: 18px;
+    -fx-font-size: 16pt;
     -fx-font-weight: bold;
 }

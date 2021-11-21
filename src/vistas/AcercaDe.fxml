@@ -4,8 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" spacing="5.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.AcercaDeControlador">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200.0" minWidth="400.0" prefWidth="400.0" spacing="5.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.AcercaDeControlador">
    <children>
       <Label fx:id="tituloProyectoLabel" text="Codificación Digital" />
       <Label text="Proyecto final para la materia de Comunicaciones en Redes" textAlignment="CENTER" wrapText="true" />

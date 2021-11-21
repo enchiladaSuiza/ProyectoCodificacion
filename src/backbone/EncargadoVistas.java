@@ -14,7 +14,9 @@ import vistas.PrincipalControlador;
 import vistas.TutorialControlador;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Base64;
 
 /**
  * Se encarga de inicializar las vistas y sus respectivos controladores.
@@ -33,6 +35,7 @@ public class EncargadoVistas {
     private final String archivoTemaOscuro = "../vistas/css/temaOscuro.css";
     private final String archivoAcentoAzul = "../vistas/css/acentoAzul.css";
     private final String archivoAcentoVerde = "../vistas/css/acentoVerde.css";
+    private String archivoLetraCss;
 
     private final String archivoIcono = "../vistas/imagenes/icono.png";
 
@@ -41,6 +44,8 @@ public class EncargadoVistas {
     private String estilosBase;
     private ArrayList<String> temas, acentos;
     private ObservableList<String> stylesheets;
+    private String letraCss;
+    private int fontSize = 9;
 
     /**
      * Inicializa los estilos y los añade a sus respectivas listas, así como la escena y
@@ -62,7 +67,10 @@ public class EncargadoVistas {
         acentos.add(acentoAzul);
         acentos.add(acentoVerde);
 
-        stylesheets = FXCollections.observableArrayList(estilosBase);
+        letraCss = ".root { -fx-font-size: " + fontSize + "pt; }";
+        archivoLetraCss = "data:text/css;base64," +
+                Base64.getEncoder().encodeToString(letraCss.getBytes(StandardCharsets.UTF_8));
+        stylesheets = FXCollections.observableArrayList(estilosBase, archivoLetraCss);
         stylesheets.addListener((ListChangeListener<String>) change -> {
             if (escena != null) {
                 escena.getStylesheets().clear();
@@ -146,11 +154,15 @@ public class EncargadoVistas {
                 controlador.init(this);
             }
             case archivoTutorial -> {
+                escenario.setMinWidth(180);
+                escenario.setMinHeight(100);
                 escenario.show();
                 TutorialControlador controlador = loader.getController();
                 controlador.init(this);
             }
             case archivoAcercaDe -> {
+                escenario.setMinWidth(400);
+                escenario.setMinHeight(300);
                 escenario.show();
                 AcercaDeControlador controlador = loader.getController();
                 controlador.init(this);
@@ -204,5 +216,21 @@ public class EncargadoVistas {
                 break;
             }
         }
+    }
+
+    public void agrandarLetra() {
+        letraCss = ".root { -fx-font-size: " + ++fontSize + "pt; }";
+        stylesheets.remove(archivoLetraCss);
+        archivoLetraCss = "data:text/css;base64," +
+                Base64.getEncoder().encodeToString(letraCss.getBytes(StandardCharsets.UTF_8));
+        stylesheets.add(archivoLetraCss);
+    }
+
+    public void menguarLetra() {
+        letraCss = ".root { -fx-font-size: " + --fontSize + "pt; }";
+        stylesheets.remove(archivoLetraCss);
+        archivoLetraCss = "data:text/css;base64," +
+                Base64.getEncoder().encodeToString(letraCss.getBytes(StandardCharsets.UTF_8));
+        stylesheets.add(archivoLetraCss);
     }
 }

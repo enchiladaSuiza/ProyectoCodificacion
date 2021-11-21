@@ -32,8 +32,6 @@
             </Menu>
           <Menu text="Vista">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#mostrarPortada" text="Portada" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
                   <RadioMenuItem onAction="#quitarTemas" selected="true" text="Tema claro">
                      <toggleGroup>
                         <ToggleGroup fx:id="tema" />
@@ -71,10 +69,22 @@
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="M" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></CheckMenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#agrandarLetra" text="Agrandar tamaño de letra">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="PLUS" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#menguarLetra" text="Menguar tamaño de letra">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="MINUS" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Ayuda">
                <items>
+                <MenuItem mnemonicParsing="false" onAction="#mostrarPortada" text="Portada" />
                   <MenuItem mnemonicParsing="false" onAction="#mostrarTutorial" text="Cómo usar" />
                   <MenuItem mnemonicParsing="false" onAction="#mostrarAcercaDe" text="Acerca de" />
                </items>

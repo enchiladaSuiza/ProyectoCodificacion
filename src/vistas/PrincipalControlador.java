@@ -70,6 +70,10 @@ public class PrincipalControlador {
         graficaController.alternarVoltajePorDefecto();
     }
 
+    public void agrandarLetra() { encargadoVistas.agrandarLetra(); }
+
+    public void menguarLetra() { encargadoVistas.menguarLetra(); }
+
     public EntradaControlador getEntradaController() {
         return entradaController;
     }
