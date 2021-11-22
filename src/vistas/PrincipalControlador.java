@@ -66,6 +66,10 @@ public class PrincipalControlador {
         encargadoVistas.abrirCodigos();
     }
 
+    public void mostrarTablaAscii() throws Exception {
+        encargadoVistas.abrirAscii();
+    }
+
     public void alternarSimbolos() {
         graficaController.alternarSimbolos();
     }

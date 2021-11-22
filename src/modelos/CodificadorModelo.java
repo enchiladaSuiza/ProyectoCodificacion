@@ -15,4 +15,7 @@ public interface CodificadorModelo {
     StringProperty entradaTextoProperty();
     StringProperty tipoEntradaProperty();
     StringProperty salidaBinarioProperty();
+    String numeroAscii(Long numero);
+
+    String convertirNumero(Long numero);
 }

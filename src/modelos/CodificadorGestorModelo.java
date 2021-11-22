@@ -1,9 +1,8 @@
 package modelos;
 
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.SimpleLongProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * Se encarga de convertir las entradas a sus respectivas formas en binario.
@@ -24,6 +23,7 @@ public class CodificadorGestorModelo implements CodificadorModelo {
         entradaTexto = new SimpleStringProperty();
         tipoEntrada = new SimpleStringProperty();
         salidaBinario = new SimpleStringProperty();
+
         entradaBinario.addListener(
                 (observableValue, anterior, nuevo) -> {
                     if (nuevo == null || nuevo.isEmpty()) {
@@ -86,6 +86,10 @@ public class CodificadorGestorModelo implements CodificadorModelo {
             return "";
         }
         return Long.toBinaryString(numero);
+    }
+
+    public String numeroAscii(Long numero) {
+        return String.valueOf((char)numero.longValue());
     }
 
     @Override
