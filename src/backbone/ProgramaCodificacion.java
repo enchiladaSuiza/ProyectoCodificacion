@@ -10,8 +10,6 @@ import javafx.stage.Stage;
  */
 public class ProgramaCodificacion extends Application {
     public static void main(String[] args) {
-        String directorio = System.getProperty("user.dir");
-        System.out.println("ProgramaCodificacion: " + directorio);
         Application.launch(args);
     }
 

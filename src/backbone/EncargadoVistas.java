@@ -29,6 +29,7 @@ public class EncargadoVistas {
     private final String archivoAcercaDe = "/fxml/AcercaDe.fxml";
     private final String archivoIntro  = "/fxml/Intro.fxml";
     private final String archivoCodigos = "/fxml/Codigos.fxml";
+    private final String archivoAscii = "/fxml/Ascii.fxml";
 
     private final String archivoEstilosBase = "/css/estilosBase.css";
     private final String archivoTemaOscuro = "/css/temaOscuro.css";
@@ -123,8 +124,12 @@ public class EncargadoVistas {
         abrirVista(archivoIntro);
     }
 
-    public void abrirCodigos() throws  Exception {
+    public void abrirCodigos() throws Exception {
         abrirVista(archivoCodigos);
+    }
+
+    public void abrirAscii() throws Exception {
+        abrirVista(archivoAscii);
     }
 
     /**
@@ -195,6 +200,13 @@ public class EncargadoVistas {
                 escenario.show();
                 CodigosControlador controlador = loader.getController();
                 controlador.init(this);
+            }
+            case archivoAscii -> {
+                escenario.setMinWidth(300);
+                escenario.setMinHeight(300);
+                escenario.show();
+                AsciiControlador controlador = loader.getController();
+                controlador.init(fabricaModelosVista.getAsciiModeloVista(), this);
             }
         }
     }
