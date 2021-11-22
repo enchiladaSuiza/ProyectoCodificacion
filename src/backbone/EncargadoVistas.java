@@ -23,19 +23,19 @@ public class EncargadoVistas {
     private final FabricaModelosVista fabricaModelosVista;
     private final String titulo = "Codificación Digital";
 
-    private final String archivoPantallaPrincipal = "../vistas/fxml/Principal.fxml";
-    private final String archivoPortada = "../vistas/fxml/Portada.fxml";
-    private final String archivoTutorial = "../vistas/fxml/Tutorial.fxml";
-    private final String archivoAcercaDe = "../vistas/fxml/AcercaDe.fxml";
-    private final String archivoIntro  = "../vistas/fxml/Intro.fxml";
+    private final String archivoPantallaPrincipal = "/fxml/Principal.fxml";
+    private final String archivoPortada = "/fxml/Portada.fxml";
+    private final String archivoTutorial = "/fxml/Tutorial.fxml";
+    private final String archivoAcercaDe = "/fxml/AcercaDe.fxml";
+    private final String archivoIntro  = "/fxml/Intro.fxml";
 
-    private final String archivoEstilosBase = "../vistas/css/estilosBase.css";
-    private final String archivoTemaOscuro = "../vistas/css/temaOscuro.css";
-    private final String archivoAcentoAzul = "../vistas/css/acentoAzul.css";
-    private final String archivoAcentoVerde = "../vistas/css/acentoVerde.css";
+    private final String archivoEstilosBase = "/css/estilosBase.css";
+    private final String archivoTemaOscuro = "/css/temaOscuro.css";
+    private final String archivoAcentoAzul = "/css/acentoAzul.css";
+    private final String archivoAcentoVerde = "/css/acentoVerde.css";
     private String archivoLetraCss;
 
-    private final String archivoIcono = "../vistas/imagenes/icono.png";
+    private final String archivoIcono = "/imagenes/icono.png";
 
     private Image icono;
     private Scene escena;
@@ -52,16 +52,25 @@ public class EncargadoVistas {
      */
     public EncargadoVistas(FabricaModelosVista fabricaModelosVista) {
         this.fabricaModelosVista = fabricaModelosVista;
+        String temaOscuro = "";
+        String acentoAzul = "";
+        String acentoVerde = "";
 
-        estilosBase = getClass().getResource(archivoEstilosBase).toExternalForm();
+        try {
+            estilosBase = getClass().getResource(archivoEstilosBase).toExternalForm();
+            temaOscuro = getClass().getResource(archivoTemaOscuro).toExternalForm();
+            acentoAzul = getClass().getResource(archivoAcentoAzul).toExternalForm();
+            acentoVerde = getClass().getResource(archivoAcentoVerde).toExternalForm();
+            icono = new Image(getClass().getResourceAsStream(archivoIcono));
+        } catch (Exception e) {
+            System.out.println("Haha, you wanted to load some files, what a fool.");
+            e.printStackTrace();
+        }
 
         temas = new ArrayList<>();
-        String temaOscuro = getClass().getResource(archivoTemaOscuro).toExternalForm();
         temas.add(temaOscuro);
 
         acentos = new ArrayList<>();
-        String acentoAzul = getClass().getResource(archivoAcentoAzul).toExternalForm();
-        String acentoVerde = getClass().getResource(archivoAcentoVerde).toExternalForm();
         acentos.add(acentoAzul);
         acentos.add(acentoVerde);
 
@@ -75,8 +84,6 @@ public class EncargadoVistas {
                 escena.getStylesheets().addAll(change.getList());
             }
         });
-
-        icono = new Image(getClass().getResourceAsStream(archivoIcono));
     }
 
     /**
