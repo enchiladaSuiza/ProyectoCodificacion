@@ -276,7 +276,7 @@ public class EncargadoVistas {
     public void menguarLetra() {
         fontSize--;
         if (fontSize > 0) {
-            letraCss = ".root { -fx-font-size: " + --fontSize + "pt; }";
+            letraCss = ".root { -fx-font-size: " + fontSize + "pt; }";
             stylesheets.remove(archivoLetraCss);
             archivoLetraCss = "data:text/css;base64," +
                     Base64.getEncoder().encodeToString(letraCss.getBytes(StandardCharsets.UTF_8));
