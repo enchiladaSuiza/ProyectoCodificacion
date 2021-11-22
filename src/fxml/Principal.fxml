@@ -86,6 +86,7 @@
                <items>
                 <MenuItem mnemonicParsing="false" onAction="#mostrarPortada" text="Portada" />
                   <MenuItem mnemonicParsing="false" onAction="#mostrarIntro" text="Introducción" />
+                  <MenuItem mnemonicParsing="false" onAction="#mostrarCodigos" text="Códigos de línea" />
                   <MenuItem mnemonicParsing="false" onAction="#mostrarTutorial" text="Cómo usar" />
                   <MenuItem mnemonicParsing="false" onAction="#mostrarAcercaDe" text="Acerca de" />
                </items>

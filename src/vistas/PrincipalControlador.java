@@ -62,6 +62,10 @@ public class PrincipalControlador {
         encargadoVistas.abrirIntro();
     }
 
+    public void mostrarCodigos() throws Exception {
+        encargadoVistas.abrirCodigos();
+    }
+
     public void alternarSimbolos() {
         graficaController.alternarSimbolos();
     }

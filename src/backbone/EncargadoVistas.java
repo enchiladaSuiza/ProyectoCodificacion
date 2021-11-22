@@ -28,6 +28,7 @@ public class EncargadoVistas {
     private final String archivoTutorial = "/fxml/Tutorial.fxml";
     private final String archivoAcercaDe = "/fxml/AcercaDe.fxml";
     private final String archivoIntro  = "/fxml/Intro.fxml";
+    private final String archivoCodigos = "/fxml/Codigos.fxml";
 
     private final String archivoEstilosBase = "/css/estilosBase.css";
     private final String archivoTemaOscuro = "/css/temaOscuro.css";
@@ -122,6 +123,10 @@ public class EncargadoVistas {
         abrirVista(archivoIntro);
     }
 
+    public void abrirCodigos() throws  Exception {
+        abrirVista(archivoCodigos);
+    }
+
     /**
      * Inicializa y muestra el archivo fxml que le es dado.
      * Inicializa los controladores correspondienes.
@@ -181,6 +186,14 @@ public class EncargadoVistas {
                 escenario.setMinHeight(100);
                 escenario.show();
                 IntroControlador controlador = loader.getController();
+                controlador.init(this);
+            }
+            case archivoCodigos -> {
+                escenario.setMinWidth(300);
+                escenario.setMinHeight(400);
+                escenario.setWidth(700);
+                escenario.show();
+                CodigosControlador controlador = loader.getController();
                 controlador.init(this);
             }
         }

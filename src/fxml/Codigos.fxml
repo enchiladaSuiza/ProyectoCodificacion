@@ -1,17 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300.0" minWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-</GridPane>
+<ScrollPane fitToWidth="true" pannable="true" prefHeight="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.CodigosControlador">
+   <content>
+      <GridPane alignment="CENTER" hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="300.0" vgap="15.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+            <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+            <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+            <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+        </rowConstraints>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <children>
+            <Label fx:id="header" alignment="CENTER" contentDisplay="CENTER" text="Codificación / Bit" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></Label>
+            <Label fx:id="header" alignment="CENTER" contentDisplay="CENTER" text="0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES" />
+            <Label fx:id="header" alignment="CENTER" contentDisplay="CENTER" text="1" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Unipolar" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Nulo" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="+" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="NRZ-L (Non Return to Zero Level)" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="+" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="-" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="NRZ-I (Non Return to Zero Inverted)" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Último voltaje" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="131.0" layoutY="212.0" text="Alterna entre + y -" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="RZ (Return to Zero)" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.vgrow="SOMETIMES">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Primero -, luego nulo" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Primero +, luego nulo" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="AMI" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.vgrow="SOMETIMES">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Nulo" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Alterna entre + y -" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Pseudoternaria" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="6" GridPane.vgrow="SOMETIMES">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Alterna entre + y -" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="6" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Nulo" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="6" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="B8ZS (Bipolar with 8 Zero Substitution)" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="7" GridPane.vgrow="SOMETIMES">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Igual que AMI. Reemplaza ocho ceros seguidos si el último valor de tensión fue&#10;+ → 000+-0-+&#10;- → 000-+0+-" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="7" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="B6ZS (Bipolar with 6 Zero Substitution)" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="8" GridPane.vgrow="SOMETIMES">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Igual que AMI. Reemplaza seis ceros seguidos si el último valor de tensión fue&#10;+ → 0+-0-+&#10;- → 0-+0+-" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="8" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="B3ZS (Bipolar with 3 Zero Substitution)" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="9" GridPane.vgrow="SOMETIMES">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Igual que AMI. Reemplaza tres ceros seguidos según&#10;Polaridad anterior / Número de pulsos desde la última transición&#10;- / Impar → 00-&#10;- / Par → +0+&#10;+ / Impar → 00+&#10;+ / Par → -0-" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="9" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="HDB3 (High Density Bipolar 3)" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="10" GridPane.vgrow="SOMETIMES">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Igual que AMI. Reemplaza cuatro ceros seguidos según&#10;Polaridad anterior / Paridad anterior&#10;- / Impar → 000-&#10;- / Par → +00+&#10;+ / Impar → 000+&#10;+ / Par → -00-" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="10" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Manchester" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="11" GridPane.vgrow="SOMETIMES">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Primero +, luego -" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="11" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Primero -, luego +" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="11" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Manchester Diferencial" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="12" GridPane.vgrow="SOMETIMES">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Transición al inicio" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="12" GridPane.vgrow="SOMETIMES" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Transición a la mitad" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="12" GridPane.vgrow="SOMETIMES" />
+         </children>
+      </GridPane>
+   </content>
+</ScrollPane>
